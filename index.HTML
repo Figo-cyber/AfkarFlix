@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afkar · Netflix Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== NETFLIX PALETTE ===== */
+    :root {
+      --nf-black:   #141414;
+      --nf-dark:    #000000;
+      --nf-red:     #E50914;
+      --nf-red-hover: #f40612;
+      --nf-gray:    #808080;
+      --nf-light:   #e5e5e5;
+      --nf-card-bg: #181818;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--nf-black);
+      color: var(--nf-light);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+      padding: 1.2rem 4%;
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: background 0.3s;
+    }
+    .navbar.scrolled {
+      background: var(--nf-black);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; color: var(--nf-red);
+      letter-spacing: 2px; text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      color: var(--nf-light); text-decoration: none;
+      font-size: 0.9rem; font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--nf-gray); }
+    .theme-toggle {
+      background: transparent; border: none; color: white;
+      font-size: 1.2rem; cursor: pointer; transition: 0.2s;
+    }
+    .theme-toggle:hover { color: var(--nf-red); }
+
+    /* ===== HERO / HOME ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 4%;
+      background: 
+        linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%),
+        linear-gradient(to top, var(--nf-black) 0%, transparent 40%),
+        url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+    }
+    .hero-content { max-width: 600px; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.8rem; font-weight: 800; letter-spacing: 2px;
+      color: var(--nf-gray); margin-bottom: 1rem;
+    }
+    .hero-badge span { color: var(--nf-red); font-size: 1.2rem; }
+    .hero-content h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem; line-height: 1;
+      margin-bottom: 0.5rem; color: #fff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+    }
+    .hero-content h2 {
+      font-size: 1.5rem; font-weight: 400;
+      color: var(--nf-light); margin-bottom: 1.5rem;
+    }
+    .hero-content p {
+      font-size: 1.1rem; color: #ccc;
+      margin-bottom: 2rem; max-width: 500px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    .hero-btns { display: flex; gap: 1rem; }
+    .btn {
+      padding: 0.8rem 2rem; border-radius: 4px;
+      font-size: 1rem; font-weight: 600;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+      transition: 0.2s; border: none; cursor: pointer;
+    }
+    .btn-play { background: #fff; color: #000; }
+    .btn-play:hover { background: rgba(255,255,255,0.8); }
+    .btn-info { background: rgba(109, 109, 110, 0.7); color: #fff; }
+    .btn-info:hover { background: rgba(109, 109, 110, 0.4); }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 4rem 4%; position: relative; }
+    .section-title {
+      font-size: 1.5rem; font-weight: 700;
+      margin-bottom: 1.5rem; color: #e5e5e5;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title i { color: var(--nf-red); font-size: 1.2rem; }
+
+    /* ===== ABOUT ME (CARD STYLE) ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      background: var(--nf-card-bg);
+      border-radius: 8px; padding: 2rem;
+      border-left: 5px solid var(--nf-red);
+    }
+    .about-text h3 { font-size: 1.8rem; margin-bottom: 1rem; color: #fff; }
+    .about-text p { color: #b3b3b3; margin-bottom: 1rem; font-size: 1rem; }
+    .about-details { display: flex; flex-direction: column; gap: 0.8rem; }
+    .detail-item { display: flex; align-items: center; gap: 15px; }
+    .detail-item i { color: var(--nf-red); width: 20px; text-align: center; }
+    .detail-item span { color: #e5e5e5; font-weight: 600; }
+    .detail-item strong { color: #b3b3b3; font-weight: 400; }
+
+    /* ===== PROJECTS (NETFLIX ROW) ===== */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--nf-card-bg);
+      border-radius: 6px; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer; position: relative;
+    }
+    .project-card:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    }
+    .project-img {
+      width: 100%; height: 160px;
+      position: relative; overflow: hidden;
+    }
+    .project-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: filter 0.3s;
+    }
+    .project-card:hover .project-img img { filter: brightness(0.7); }
+    .project-info { padding: 1.2rem; }
+    .project-info h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
+    .project-info p { font-size: 0.85rem; color: #b3b3b3; margin-bottom: 1rem; }
+    .project-meta {
+      font-size: 0.75rem; color: #888;
+      border-top: 1px solid #333; padding-top: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .project-meta div { margin-bottom: 0.4rem; display: flex; gap: 5px; }
+    .project-meta span { color: var(--nf-red); font-weight: 600; }
+
+    /* ===== SKILLS (PROGRESS BARS) ===== */
+    .skills-container {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .skill-category {
+      background: var(--nf-card-bg);
+      padding: 2rem; border-radius: 8px;
+    }
+    .skill-category h3 { margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem; }
+    .skill-item { margin-bottom: 1.2rem; }
+    .skill-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.9rem; margin-bottom: 0.5rem; color: #b3b3b3;
+    }
+    .skill-bar {
+      height: 8px; background: #333;
+      border-radius: 4px; overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%; width: 0;
+      background: var(--nf-red);
+      border-radius: 4px;
+      transition: width 1.5s ease-in-out;
+    }
+    .soft-skills { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .soft-tag {
+      background: #333; color: #e5e5e5;
+      padding: 0.5rem 1rem; border-radius: 4px;
+      font-size: 0.9rem; font-weight: 600;
+    }
+
+    /* ===== ACHIEVEMENTS & EDUCATION ===== */
+    .info-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .info-card {
+      background: var(--nf-card-bg); padding: 1.5rem;
+      border-radius: 8px; border-top: 3px solid var(--nf-red);
+    }
+    .info-card h3 { color: #fff; margin-bottom: 1rem; font-size: 1.1rem; }
+    .info-card ul { list-style: none; }
+    .info-card ul li {
+      color: #b3b3b3; font-size: 0.95rem;
+      margin-bottom: 0.8rem; display: flex; gap: 10px;
+    }
+    .info-card ul li i { color: var(--nf-red); margin-top: 4px; }
+
+    /* ===== HOBBIES ===== */
+    .hobby-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
+    }
+    .hobby-card {
+      background: var(--nf-card-bg); padding: 1.5rem;
+      border-radius: 8px; text-align: center;
+      transition: 0.3s;
+    }
+    .hobby-card:hover { background: #333; transform: translateY(-5px); }
+    .hobby-card i { font-size: 2rem; color: var(--nf-red); margin-bottom: 1rem; display: block; }
+    .hobby-card h4 { color: #fff; font-size: 1rem; margin-bottom: 0.5rem; }
+    .hobby-card p { color: #b3b3b3; font-size: 0.8rem; }
+
+    /* ===== GOALS ===== */
+    .goal-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+      padding: 2.5rem; border-radius: 8px;
+      border: 1px solid #333; text-align: center;
+    }
+    .goal-card h3 { color: var(--nf-red); font-size: 1.5rem; margin-bottom: 1.5rem; }
+    .goal-card ul {
+      list-style: none; display: inline-block; text-align: left;
+    }
+    .goal-card ul li {
+      color: #e5e5e5; margin-bottom: 1rem; font-size: 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .goal-card ul li i { color: var(--nf-red); }
+
+    /* ===== CONTACT ===== */
+    .contact-container {
+      background: var(--nf-card-bg); padding: 2.5rem;
+      border-radius: 8px; text-align: center;
+    }
+    .contact-container p { color: #b3b3b3; margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: #fff; text-decoration: none; font-weight: 600;
+      padding: 1rem 2rem; border-radius: 4px;
+      background: #333; transition: 0.3s;
+    }
+    .contact-btn:hover { background: var(--nf-red); transform: scale(1.05); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center; padding: 3rem 4%;
+      color: #808080; font-size: 0.9rem;
+      border-top: 1px solid #333; margin-top: 2rem;
+    }
+    footer strong { color: var(--nf-red); }
+
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 50px; height: 50px;
+      background: var(--nf-red); color: white;
+      border-radius: 50%; display: flex; justify-content: center; align-items: center;
+      font-size: 1.2rem; text-decoration: none;
+      opacity: 0; visibility: hidden; transition: 0.3s;
+      z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: #fff; color: var(--nf-red); transform: scale(1.1); }
+
+    /* ===== WELCOME OVERLAY ===== */
+    .welcome-overlay {
+      position: fixed; inset: 0; background: #000;
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999; animation: fadeOut 3s forwards;
+    }
+    .welcome-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem; color: var(--nf-red);
+      letter-spacing: 5px;
+      animation: zoomIn 1s ease-out;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+    @keyframes zoomIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== LIGHT MODE (Cinema Bright) ===== */
+    body.light-mode {
+      background-color: #f4f4f4; color: #141414;
+    }
+    body.light-mode .navbar { background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%); }
+    body.light-mode .navbar.scrolled { background: #f4f4f4; }
+    body.light-mode .nav-links a { color: #141414; }
+    body.light-mode .nav-links a:hover { color: var(--nf-red); }
+    body.light-mode .hero-content h1, 
+    body.light-mode .hero-content h2 { color: #141414; text-shadow: none; }
+    body.light-mode .hero-content p { color: #333; text-shadow: none; }
+    body.light-mode .btn-play { background: #141414; color: #fff; }
+    body.light-mode .btn-info { background: rgba(0,0,0,0.2); color: #141414; }
+    body.light-mode .about-grid,
+    body.light-mode .skill-category,
+    body.light-mode .project-card,
+    body.light-mode .info-card,
+    body.light-mode .hobby-card,
+    body.light-mode .goal-card,
+    body.light-mode .contact-container { background: #fff; color: #141414; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    body.light-mode .about-text h3,
+    body.light-mode .skill-category h3,
+    body.light-mode .project-info h4,
+    body.light-mode .info-card h3,
+    body.light-mode .hobby-card h4,
+    body.light-mode .goal-card h3 { color: #141414; }
+    body.light-mode .about-text p,
+    body.light-mode .detail-item strong,
+    body.light-mode .skill-label,
+    body.light-mode .project-info p,
+    body.light-mode .info-card ul li,
+    body.light-mode .hobby-card p,
+    body.light-mode .goal-card ul li,
+    body.light-mode .contact-container p { color: #555; }
+    body.light-mode .soft-tag { background: #eee; color: #333; }
+    body.light-mode .project-meta { border-color: #ddd; }
+    body.light-mode .contact-btn { background: #eee; color: #141414; }
+    body.light-mode .contact-btn:hover { background: var(--nf-red); color: #fff; }
+    body.light-mode footer { border-color: #ddd; color: #555; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 3rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .navbar { flex-direction: column; gap: 1rem; padding: 1rem; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .hero { height: 80vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Welcome Overlay -->
+  <div class="welcome-overlay">
+    <div class="welcome-text">AFKAR</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="logo"><i class="fas fa-play-circle"></i> AFKARFLIX</a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Karya</a>
+      <a href="#hobbies">Hobi</a>
+      <a href="#skills">Skills</a>
+      <a href="#goals">Goals</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" title="Ganti Tema"><i class="fas fa-sun"></i></button>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span>N</span> ORIGINAL PORTFOLIO</div>
+      <h1>AFKAR</h1>
+      <h2>Afkar Thufail Effendi</h2>
+      <p>Pelajar kelas 9 Ali. Suka makan, main game, baca buku, nonton film, futsal, dan belajar. Selamat datang di profil saya!</p>
+      <div class="hero-btns">
+        <a href="#about" class="btn btn-play"><i class="fas fa-play"></i> Mulai Jelajahi</a>
+        <a href="#projects" class="btn btn-info"><i class="fas fa-info-circle"></i> Lihat Karya</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title"><i class="fas fa-user"></i> Tentang Saya</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Halo, Aku Afkar!</h3>
+        <p>Seorang pelajar kelas 9 Ali yang hobi makan, main game, baca buku, nonton film, dan futsal. Aku juga suka belajar hal baru.</p>
+        <p>Selalu penasaran dan senang mencoba tantangan baru, baik di dunia akademik maupun di waktu luang.</p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item">
+          <i class="fas fa-id-card"></i>
+          <div><strong>Nama Lengkap</strong><br><span>Afkar Thufail Effendi</span></div>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-smile"></i>
+          <div><strong>Panggilan</strong><br><span>Afkar</span></div>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-school"></i>
+          <div><strong>Kelas</strong><br><span>9 Ali</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS / KARYA -->
+  <section id="projects">
+    <h2 class="section-title"><i class="fas fa-video"></i> Hasil Karya</h2>
+    <div class="project-grid">
+
+      <!-- Karya 1 -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600" alt="Gaming">
+        </div>
+        <div class="project-info">
+          <h4>Game Session & Strategi</h4>
+          <p>Bermain game sambil melatih strategi dan kerja sama tim.</p>
+          <div class="project-meta">
+            <div><span>Minat:</span> Game & Strategi</div>
+            <div><span>Aktivitas:</span> Main Game</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Karya 2 -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600" alt="Membaca Buku">
+        </div>
+        <div class="project-info">
+          <h4>Koleksi Bacaan</h4>
+          <p>Membaca buku untuk menambah wawasan dan pengetahuan.</p>
+          <div class="project-meta">
+            <div><span>Minat:</span> Literasi</div>
+            <div><span>Aktivitas:</span> Baca Buku</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Karya 3 -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=600" alt="Nonton Film">
+        </div>
+        <div class="project-info">
+          <h4>Film Pilihan</h4>
+          <p>Menonton film sebagai hiburan dan sumber inspirasi.</p>
+          <div class="project-meta">
+            <div><span>Minat:</span> Sinematografi</div>
+            <div><span>Aktivitas:</span> Nonton Film</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Karya 4 -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=600" alt="Futsal">
+        </div>
+        <div class="project-info">
+          <h4>Futsal & Kebugaran</h4>
+          <p>Bermain futsal untuk menjaga kesehatan dan sportivitas.</p>
+          <div class="project-meta">
+            <div><span>Minat:</span> Olahraga</div>
+            <div><span>Aktivitas:</span> Futsal</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2 class="section-title"><i class="fas fa-star"></i> Kemampuan</h2>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h3>Hard Skills</h3>
+        <div class="skill-item">
+          <div class="skill-label"><span>Belajar & Akademik</span><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label"><span>Main Game & Strategi</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label"><span>Futsal</span><span>80%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-label"><span>Membaca & Analisis</span><span>78%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Soft Skills</h3>
+        <div class="soft-skills">
+          <span class="soft-tag">Cepat Belajar</span>
+          <span class="soft-tag">Kreativitas</span>
+          <span class="soft-tag">Kerja Sama Tim</span>
+          <span class="soft-tag">Manajemen Waktu</span>
+          <span class="soft-tag">Komunikasi</span>
+          <span class="soft-tag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBIES -->
+  <section id="hobbies">
+    <h2 class="section-title"><i class="fas fa-gamepad"></i> Hobi & Minat</h2>
+    <div class="hobby-grid">
+      <div class="hobby-card">
+        <i class="fas fa-utensils"></i>
+        <h4>Makan</h4>
+        <p>Nikmati berbagai makanan.</p>
+      </div>
+      <div class="hobby-card">
+        <i class="fas fa-gamepad"></i>
+        <h4>Main Game</h4>
+        <p>Game favorit dan seru.</p>
+      </div>
+      <div class="hobby-card">
+        <i class="fas fa-book"></i>
+        <h4>Baca Buku</h4>
+        <p>Buku cerita dan pengetahuan.</p>
+      </div>
+      <div class="hobby-card">
+        <i class="fas fa-film"></i>
+        <h4>Nonton Film</h4>
+        <p>Film seru dan menarik.</p>
+      </div>
+      <div class="hobby-card">
+        <i class="fas fa-futbol"></i>
+        <h4>Futsal</h4>
+        <p>Olahraga favorit.</p>
+      </div>
+      <div class="hobby-card">
+        <i class="fas fa-brain"></i>
+        <h4>Belajar</h4>
+        <p>Mencari ilmu baru.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <section id="goals">
+    <h2 class="section-title"><i class="fas fa-rocket"></i> Cita-cita & Target</h2>
+    <div class="goal-card">
+      <h3>Menuju Masa Depan</h3>
+      <ul>
+        <li><i class="fas fa-chevron-right"></i> Terus belajar dan meraih prestasi di sekolah.</li>
+        <li><i class="fas fa-chevron-right"></i> Mengembangkan diri lewat hobi dan minat.</li>
+        <li><i class="fas fa-chevron-right"></i> Menjadi pribadi yang bermanfaat bagi orang lain.</li>
+        <li><i class="fas fa-chevron-right"></i> Melanjutkan pendidikan ke jenjang yang lebih tinggi.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-title"><i class="fas fa-envelope"></i> Hubungi Saya</h2>
+    <div class="contact-container">
+      <p>Mau ngobrol, kolaborasi, atau sekadar say hi? Hubungi aku lewat media di bawah ini:</p>
+      <div class="contact-links">
+        <a href="https://instagram.com/afkar" target="_blank" class="contact-btn">
+          <i class="fab fa-instagram"></i> @afkar
+        </a>
+        <a href="https://tiktok.com/@gataulupa" target="_blank" class="contact-btn">
+          <i class="fab fa-tiktok"></i> @gataulupa
+        </a>
+        <a href="mailto:afkar.thufail91@smp.belajar.id" class="contact-btn">
+          <i class="fas fa-envelope"></i> Email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Personal Portfolio | Created by <strong>Afkar Thufail Effendi</strong></p>
+    <p style="margin-top:0.5rem;">Kelas 9 Ali</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#home" class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- Scripts -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      if (document.body.classList.contains('light-mode')) {
+        icon.className = 'fas fa-moon';
+      } else {
+        icon.className = 'fas fa-sun';
+      }
+    });
+
+    // Skill bar animation on scroll
+    const fills = document.querySelectorAll('.skill-fill');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.style.width = e.target.dataset.width;
+      });
+    }, { threshold: 0.4 });
+    fills.forEach(f => obs.observe(f));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+
+    // Welcome overlay cleanup
+    setTimeout(() => {
+      const o = document.querySelector('.welcome-overlay');
+      if (o) o.remove();
+    }, 3000);
+  </script>
+</body>
+</html>
