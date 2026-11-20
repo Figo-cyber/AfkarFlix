@@ -1,654 +1,338 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Afkar · Netflix Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* ===== NETFLIX PALETTE ===== */
-    :root {
-      --nf-black:   #141414;
-      --nf-dark:    #000000;
-      --nf-red:     #E50914;
-      --nf-red-hover: #f40612;
-      --nf-gray:    #808080;
-      --nf-light:   #e5e5e5;
-      --nf-card-bg: #181818;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AFKARFLIX · Portofolio Afkar Thufail Effendi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f5f7;--surface:#fff;--surface2:#ececf0;--text:#16161a;--muted:#5d5d68;--line:#dcdce3;
+  --red:#e50914;--glow:rgba(229,9,20,.18);--nav:rgba(245,245,247,.82);
+  box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0b0b0d;--surface:#17171b;--surface2:#24242a;--text:#f2f2f5;--muted:#a1a1ad;--line:#2c2c34;--glow:rgba(229,9,20,.35);--nav:rgba(11,11,13,.8)}
+}
+:root[data-theme="dark"]{--bg:#0b0b0d;--surface:#17171b;--surface2:#24242a;--text:#f2f2f5;--muted:#a1a1ad;--line:#2c2c34;--glow:rgba(229,9,20,.35);--nav:rgba(11,11,13,.8)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,.logo,.big{font-family:'Bebas Neue','Impact',sans-serif;letter-spacing:1px;font-weight:400}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:.8rem 4%;padding-top:calc(.8rem + env(safe-area-inset-top,0px));background:var(--nav);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{color:var(--red);font-size:1.8rem;text-decoration:none;text-shadow:0 0 18px var(--glow)}
+.links{display:flex;gap:1.2rem;align-items:center;overflow-x:auto;scrollbar-width:none}
+.links a{color:var(--text);text-decoration:none;font-size:.85rem;font-weight:600;opacity:.75;white-space:nowrap;transition:.2s}
+.links a:hover{opacity:1;color:var(--red)}
+#theme{background:var(--surface2);border:1px solid var(--line);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;flex:none}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--nf-black);
-      color: var(--nf-light);
-      overflow-x: hidden;
-      line-height: 1.5;
-    }
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 4% 4rem;position:relative;overflow:hidden;
+  background:radial-gradient(60% 60% at 80% 20%,var(--glow),transparent 70%),radial-gradient(50% 50% at 10% 90%,rgba(229,9,20,.14),transparent 70%)}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:60px 60px;opacity:.35;mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent);-webkit-mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent);pointer-events:none}
+.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center;width:100%;max-width:1200px;margin:auto}
+.badge{display:inline-flex;gap:.6rem;align-items:center;font-size:.75rem;font-weight:800;letter-spacing:3px;color:var(--muted);margin-bottom:1rem}
+.badge b{color:var(--red);font-family:'Bebas Neue';font-size:1.6rem;letter-spacing:0}
+.hero h1{font-size:clamp(4.5rem,13vw,9rem);line-height:.9;background:linear-gradient(180deg,var(--text),var(--muted));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h2{font-family:'Inter';font-weight:600;font-size:1.3rem;margin:.8rem 0}
+.typed{color:var(--red);font-weight:800;min-height:1.6em;font-size:1.1rem}
+.typed::after{content:"▍";animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p{color:var(--muted);max-width:480px;margin:1rem 0 2rem}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{padding:.85rem 1.8rem;border-radius:6px;font-weight:800;text-decoration:none;font-size:.95rem;transition:.25s;display:inline-block}
+.btn.p{background:var(--red);color:#fff;box-shadow:0 8px 28px var(--glow)}
+.btn.p:hover{transform:translateY(-3px);box-shadow:0 12px 34px var(--glow)}
+.btn.s{background:var(--surface2);color:var(--text);border:1px solid var(--line)}
+.btn.s:hover{transform:translateY(-3px)}
+.poster{aspect-ratio:3/4;max-width:320px;margin:auto;border-radius:14px;background:linear-gradient(160deg,#e50914,#6b0309 55%,#14040a);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1.6rem;color:#fff;position:relative;overflow:hidden;
+  box-shadow:0 30px 70px var(--glow);transform:rotate(3deg);transition:.4s;animation:float 5s ease-in-out infinite}
+.poster:hover{transform:rotate(0) scale(1.04)}
+.poster::before{content:"A";position:absolute;top:-1.5rem;right:-.5rem;font-family:'Bebas Neue';font-size:15rem;opacity:.18;line-height:1}
+.poster small{letter-spacing:3px;font-weight:800;opacity:.8;font-size:.7rem}
+.poster .big{font-size:3.4rem;line-height:1}
+.poster span{font-size:.85rem;opacity:.85}
+@keyframes float{50%{translate:0 -12px}}
 
-    /* ===== NAVBAR ===== */
-    .navbar {
-      background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-      padding: 1.2rem 4%;
-      position: fixed; top: 0; width: 100%; z-index: 1000;
-      display: flex; justify-content: space-between; align-items: center;
-      transition: background 0.3s;
-    }
-    .navbar.scrolled {
-      background: var(--nf-black);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem; color: var(--nf-red);
-      letter-spacing: 2px; text-decoration: none;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a {
-      color: var(--nf-light); text-decoration: none;
-      font-size: 0.9rem; font-weight: 600;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--nf-gray); }
-    .theme-toggle {
-      background: transparent; border: none; color: white;
-      font-size: 1.2rem; cursor: pointer; transition: 0.2s;
-    }
-    .theme-toggle:hover { color: var(--nf-red); }
+/* SECTIONS */
+section{padding:5rem 4%;max-width:1200px;margin:auto}
+.title{font-size:2.4rem;margin-bottom:2rem;display:flex;align-items:center;gap:.8rem}
+.title::before{content:"";width:6px;height:2.2rem;background:var(--red);border-radius:3px;box-shadow:0 0 16px var(--glow)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.6rem}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
 
-    /* ===== HERO / HOME ===== */
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex; align-items: center;
-      padding: 0 4%;
-      background: 
-        linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%),
-        linear-gradient(to top, var(--nf-black) 0%, transparent 40%),
-        url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
-    }
-    .hero-content { max-width: 600px; z-index: 2; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.8rem; font-weight: 800; letter-spacing: 2px;
-      color: var(--nf-gray); margin-bottom: 1rem;
-    }
-    .hero-badge span { color: var(--nf-red); font-size: 1.2rem; }
-    .hero-content h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 5rem; line-height: 1;
-      margin-bottom: 0.5rem; color: #fff;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
-    }
-    .hero-content h2 {
-      font-size: 1.5rem; font-weight: 400;
-      color: var(--nf-light); margin-bottom: 1.5rem;
-    }
-    .hero-content p {
-      font-size: 1.1rem; color: #ccc;
-      margin-bottom: 2rem; max-width: 500px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }
-    .hero-btns { display: flex; gap: 1rem; }
-    .btn {
-      padding: 0.8rem 2rem; border-radius: 4px;
-      font-size: 1rem; font-weight: 600;
-      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-      transition: 0.2s; border: none; cursor: pointer;
-    }
-    .btn-play { background: #fff; color: #000; }
-    .btn-play:hover { background: rgba(255,255,255,0.8); }
-    .btn-info { background: rgba(109, 109, 110, 0.7); color: #fff; }
-    .btn-info:hover { background: rgba(109, 109, 110, 0.4); }
+/* ABOUT */
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:1.5rem}
+.about h3{font-size:1.6rem;margin-bottom:.8rem}
+.about p{color:var(--muted);margin-bottom:.8rem}
+.facts{display:grid;gap:.8rem}
+.fact{display:flex;gap:1rem;align-items:center;padding:.9rem 1rem;background:var(--surface2);border-radius:10px}
+.fact i{font-style:normal;font-size:1.5rem}
+.fact small{color:var(--muted);display:block;font-size:.75rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
+.stat{text-align:center;padding:1.2rem;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.stat .big{font-size:2.6rem;color:var(--red);line-height:1}
+.stat span{font-size:.8rem;color:var(--muted)}
 
-    /* ===== SECTIONS ===== */
-    section { padding: 4rem 4%; position: relative; }
-    .section-title {
-      font-size: 1.5rem; font-weight: 700;
-      margin-bottom: 1.5rem; color: #e5e5e5;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-title i { color: var(--nf-red); font-size: 1.2rem; }
+/* KARYA */
+.row{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.2rem}
+.pc{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:.35s;cursor:pointer}
+.pc:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 20px 40px var(--glow);border-color:var(--red)}
+.thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative}
+.thumb::after{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;background:rgba(0,0,0,.45);opacity:0;transition:.3s}
+.pc:hover .thumb::after{opacity:1}
+.g1{background:linear-gradient(135deg,#7b2ff7,#2a0b5e)}.g2{background:linear-gradient(135deg,#f7971e,#7a3b00)}
+.g3{background:linear-gradient(135deg,#e50914,#4a0207)}.g4{background:linear-gradient(135deg,#11998e,#063b36)}
+.pi{padding:1.1rem}
+.pi h4{font-size:1.05rem;margin-bottom:.3rem}
+.pi p{color:var(--muted);font-size:.85rem;margin-bottom:.8rem}
+.tag{display:inline-block;font-size:.7rem;font-weight:800;padding:.2rem .6rem;border-radius:20px;background:var(--glow);color:var(--red);margin-right:.3rem}
 
-    /* ===== ABOUT ME (CARD STYLE) ===== */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      background: var(--nf-card-bg);
-      border-radius: 8px; padding: 2rem;
-      border-left: 5px solid var(--nf-red);
-    }
-    .about-text h3 { font-size: 1.8rem; margin-bottom: 1rem; color: #fff; }
-    .about-text p { color: #b3b3b3; margin-bottom: 1rem; font-size: 1rem; }
-    .about-details { display: flex; flex-direction: column; gap: 0.8rem; }
-    .detail-item { display: flex; align-items: center; gap: 15px; }
-    .detail-item i { color: var(--nf-red); width: 20px; text-align: center; }
-    .detail-item span { color: #e5e5e5; font-weight: 600; }
-    .detail-item strong { color: #b3b3b3; font-weight: 400; }
+/* HOBI */
+.hobi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
+.hb{text-align:center;padding:1.6rem 1rem;border-radius:14px;background:var(--surface);border:1px solid var(--line);transition:.3s;position:relative;overflow:hidden}
+.hb:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--red)}
+.hb em{font-style:normal;font-size:2.4rem;display:block;margin-bottom:.4rem;transition:.3s}
+.hb:hover em{transform:scale(1.25) rotate(8deg)}
+.hb h4{font-size:1rem}.hb p{color:var(--muted);font-size:.78rem}
 
-    /* ===== PROJECTS (NETFLIX ROW) ===== */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .project-card {
-      background: var(--nf-card-bg);
-      border-radius: 6px; overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer; position: relative;
-    }
-    .project-card:hover {
-      transform: scale(1.05);
-      z-index: 10;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-    }
-    .project-img {
-      width: 100%; height: 160px;
-      position: relative; overflow: hidden;
-    }
-    .project-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: filter 0.3s;
-    }
-    .project-card:hover .project-img img { filter: brightness(0.7); }
-    .project-info { padding: 1.2rem; }
-    .project-info h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
-    .project-info p { font-size: 0.85rem; color: #b3b3b3; margin-bottom: 1rem; }
-    .project-meta {
-      font-size: 0.75rem; color: #888;
-      border-top: 1px solid #333; padding-top: 0.8rem;
-      margin-top: 0.8rem;
-    }
-    .project-meta div { margin-bottom: 0.4rem; display: flex; gap: 5px; }
-    .project-meta span { color: var(--nf-red); font-weight: 600; }
+/* SKILLS */
+.sk{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.sk h3{margin-bottom:1.3rem;font-size:1.2rem}
+.bar{margin-bottom:1.1rem}
+.bar div:first-child{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:.4rem;color:var(--muted)}
+.track{height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#8f0610,var(--red));border-radius:6px;transition:width 1.6s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px var(--glow)}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{padding:.5rem 1rem;border-radius:30px;background:var(--surface2);font-size:.85rem;font-weight:600;transition:.25s;border:1px solid transparent}
+.chip:hover{background:var(--red);color:#fff;transform:scale(1.07)}
 
-    /* ===== SKILLS (PROGRESS BARS) ===== */
-    .skills-container {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .skill-category {
-      background: var(--nf-card-bg);
-      padding: 2rem; border-radius: 8px;
-    }
-    .skill-category h3 { margin-bottom: 1.5rem; color: #fff; font-size: 1.2rem; }
-    .skill-item { margin-bottom: 1.2rem; }
-    .skill-label {
-      display: flex; justify-content: space-between;
-      font-size: 0.9rem; margin-bottom: 0.5rem; color: #b3b3b3;
-    }
-    .skill-bar {
-      height: 8px; background: #333;
-      border-radius: 4px; overflow: hidden;
-    }
-    .skill-fill {
-      height: 100%; width: 0;
-      background: var(--nf-red);
-      border-radius: 4px;
-      transition: width 1.5s ease-in-out;
-    }
-    .soft-skills { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-    .soft-tag {
-      background: #333; color: #e5e5e5;
-      padding: 0.5rem 1rem; border-radius: 4px;
-      font-size: 0.9rem; font-weight: 600;
-    }
+/* GOALS */
+.tl{position:relative;padding-left:2rem;display:grid;gap:1.2rem}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--red),transparent)}
+.tl div{position:relative;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.tl div::before{content:"";position:absolute;left:-2rem;top:1.3rem;width:16px;height:16px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px var(--glow)}
 
-    /* ===== ACHIEVEMENTS & EDUCATION ===== */
-    .info-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
-    }
-    .info-card {
-      background: var(--nf-card-bg); padding: 1.5rem;
-      border-radius: 8px; border-top: 3px solid var(--nf-red);
-    }
-    .info-card h3 { color: #fff; margin-bottom: 1rem; font-size: 1.1rem; }
-    .info-card ul { list-style: none; }
-    .info-card ul li {
-      color: #b3b3b3; font-size: 0.95rem;
-      margin-bottom: 0.8rem; display: flex; gap: 10px;
-    }
-    .info-card ul li i { color: var(--nf-red); margin-top: 4px; }
+/* CONTACT */
+.contact{text-align:center;background:radial-gradient(70% 120% at 50% 0,var(--glow),transparent),var(--surface)}
+.contact p{color:var(--muted);margin-bottom:1.6rem}
+.cl{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.cl a{padding:.9rem 1.6rem;border-radius:10px;background:var(--surface2);color:var(--text);text-decoration:none;font-weight:600;transition:.3s;border:1px solid var(--line)}
+.cl a:hover{background:var(--red);color:#fff;transform:translateY(-4px)}
+footer{text-align:center;padding:2.5rem 4%;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+footer b{color:var(--red)}
+#top{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 6px 20px var(--glow);z-index:40}
+#top.show{opacity:1;pointer-events:auto}
 
-    /* ===== HOBBIES ===== */
-    .hobby-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;
-    }
-    .hobby-card {
-      background: var(--nf-card-bg); padding: 1.5rem;
-      border-radius: 8px; text-align: center;
-      transition: 0.3s;
-    }
-    .hobby-card:hover { background: #333; transform: translateY(-5px); }
-    .hobby-card i { font-size: 2rem; color: var(--nf-red); margin-bottom: 1rem; display: block; }
-    .hobby-card h4 { color: #fff; font-size: 1rem; margin-bottom: 0.5rem; }
-    .hobby-card p { color: #b3b3b3; font-size: 0.8rem; }
+/* INTRO */
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .7s,visibility .7s;cursor:pointer}
+#intro.out{opacity:0;visibility:hidden}
+#intro{animation:introAuto .7s 4.2s forwards;flex-direction:column;gap:1.6rem;overflow:hidden;background:radial-gradient(55% 45% at 50% 50%,rgba(229,9,20,.28),#000 70%)}
+#intro::before{content:"";position:absolute;top:50%;left:-40%;width:40%;height:2px;background:linear-gradient(90deg,transparent,#e50914,transparent);box-shadow:0 0 30px 6px rgba(229,9,20,.6);animation:sweep 1.8s .9s ease-in-out forwards;opacity:0}
+@keyframes sweep{0%{left:-40%;opacity:1}100%{left:110%;opacity:1}}
+.il{display:flex;gap:.15em;font-family:'Bebas Neue','Impact',sans-serif;font-size:clamp(4rem,17vw,9rem);color:#e50914;letter-spacing:6px;line-height:1;text-shadow:0 0 40px rgba(229,9,20,.75)}
+.il span{display:inline-block;opacity:0;transform:translateY(50px) scale(.7);filter:blur(8px);animation:letter .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * .13s + .2s)}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+.itag{color:#8a8a8a;font-size:.75rem;font-weight:800;letter-spacing:6px;opacity:0;animation:fadein .8s 1s forwards}
+.ib{width:min(260px,60vw);height:4px;background:#222;border-radius:4px;overflow:hidden;opacity:0;animation:fadein .5s .8s forwards}
+.ib i{display:block;height:100%;width:0;background:#e50914;box-shadow:0 0 12px #e50914;border-radius:4px}
+.ip{color:#bbb;font-size:.8rem;font-weight:600;letter-spacing:2px;opacity:0;animation:fadein .5s .8s forwards;min-height:1.2em}
+.iskip{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));color:#555;font-size:.7rem;letter-spacing:2px}
+@keyframes fadein{to{opacity:1}}
+@keyframes introAuto{to{opacity:0;visibility:hidden}}
 
-    /* ===== GOALS ===== */
-    .goal-card {
-      background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
-      padding: 2.5rem; border-radius: 8px;
-      border: 1px solid #333; text-align: center;
-    }
-    .goal-card h3 { color: var(--nf-red); font-size: 1.5rem; margin-bottom: 1.5rem; }
-    .goal-card ul {
-      list-style: none; display: inline-block; text-align: left;
-    }
-    .goal-card ul li {
-      color: #e5e5e5; margin-bottom: 1rem; font-size: 1rem;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .goal-card ul li i { color: var(--nf-red); }
 
-    /* ===== CONTACT ===== */
-    .contact-container {
-      background: var(--nf-card-bg); padding: 2.5rem;
-      border-radius: 8px; text-align: center;
-    }
-    .contact-container p { color: #b3b3b3; margin-bottom: 2rem; }
-    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
-    .contact-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      color: #fff; text-decoration: none; font-weight: 600;
-      padding: 1rem 2rem; border-radius: 4px;
-      background: #333; transition: 0.3s;
-    }
-    .contact-btn:hover { background: var(--nf-red); transform: scale(1.05); }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center; padding: 3rem 4%;
-      color: #808080; font-size: 0.9rem;
-      border-top: 1px solid #333; margin-top: 2rem;
-    }
-    footer strong { color: var(--nf-red); }
-
-    /* ===== BACK TO TOP ===== */
-    .back-to-top {
-      position: fixed; bottom: 30px; right: 30px;
-      width: 50px; height: 50px;
-      background: var(--nf-red); color: white;
-      border-radius: 50%; display: flex; justify-content: center; align-items: center;
-      font-size: 1.2rem; text-decoration: none;
-      opacity: 0; visibility: hidden; transition: 0.3s;
-      z-index: 999; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-    .back-to-top.show { opacity: 1; visibility: visible; }
-    .back-to-top:hover { background: #fff; color: var(--nf-red); transform: scale(1.1); }
-
-    /* ===== WELCOME OVERLAY ===== */
-    .welcome-overlay {
-      position: fixed; inset: 0; background: #000;
-      display: flex; justify-content: center; align-items: center;
-      z-index: 9999; animation: fadeOut 3s forwards;
-    }
-    .welcome-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 4rem; color: var(--nf-red);
-      letter-spacing: 5px;
-      animation: zoomIn 1s ease-out;
-    }
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-    @keyframes zoomIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* ===== LIGHT MODE (Cinema Bright) ===== */
-    body.light-mode {
-      background-color: #f4f4f4; color: #141414;
-    }
-    body.light-mode .navbar { background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%); }
-    body.light-mode .navbar.scrolled { background: #f4f4f4; }
-    body.light-mode .nav-links a { color: #141414; }
-    body.light-mode .nav-links a:hover { color: var(--nf-red); }
-    body.light-mode .hero-content h1, 
-    body.light-mode .hero-content h2 { color: #141414; text-shadow: none; }
-    body.light-mode .hero-content p { color: #333; text-shadow: none; }
-    body.light-mode .btn-play { background: #141414; color: #fff; }
-    body.light-mode .btn-info { background: rgba(0,0,0,0.2); color: #141414; }
-    body.light-mode .about-grid,
-    body.light-mode .skill-category,
-    body.light-mode .project-card,
-    body.light-mode .info-card,
-    body.light-mode .hobby-card,
-    body.light-mode .goal-card,
-    body.light-mode .contact-container { background: #fff; color: #141414; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    body.light-mode .about-text h3,
-    body.light-mode .skill-category h3,
-    body.light-mode .project-info h4,
-    body.light-mode .info-card h3,
-    body.light-mode .hobby-card h4,
-    body.light-mode .goal-card h3 { color: #141414; }
-    body.light-mode .about-text p,
-    body.light-mode .detail-item strong,
-    body.light-mode .skill-label,
-    body.light-mode .project-info p,
-    body.light-mode .info-card ul li,
-    body.light-mode .hobby-card p,
-    body.light-mode .goal-card ul li,
-    body.light-mode .contact-container p { color: #555; }
-    body.light-mode .soft-tag { background: #eee; color: #333; }
-    body.light-mode .project-meta { border-color: #ddd; }
-    body.light-mode .contact-btn { background: #eee; color: #141414; }
-    body.light-mode .contact-btn:hover { background: var(--nf-red); color: #fff; }
-    body.light-mode footer { border-color: #ddd; color: #555; }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .hero-content h1 { font-size: 3rem; }
-      .about-grid { grid-template-columns: 1fr; }
-      .navbar { flex-direction: column; gap: 1rem; padding: 1rem; }
-      .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-      .hero { height: 80vh; }
-    }
-  </style>
+@media(max-width:800px){
+  .hero-in,.about{grid-template-columns:1fr}
+  .poster{max-width:240px;order:-1}
+  .links a:not(:last-child){display:none}.links a.keep{display:block}
+  .hero{padding-top:6rem}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
 
-  <!-- Welcome Overlay -->
-  <div class="welcome-overlay">
-    <div class="welcome-text">AFKAR</div>
+<div id="intro" title="Klik untuk lewati">
+  <div class="il"><span style="--i:0">A</span><span style="--i:1">F</span><span style="--i:2">K</span><span style="--i:3">A</span><span style="--i:4">R</span></div>
+  <div class="itag">ORIGINAL PORTFOLIO</div>
+  <div class="ib"><i id="ibar"></i></div>
+  <div class="ip" id="ipct">Memuat profil... 0%</div>
+  <div class="iskip">KETUK UNTUK LEWATI</div>
+</div>
+
+<nav>
+  <a href="#home" class="logo">AFKARFLIX</a>
+  <div class="links">
+    <a href="#about">Tentang</a><a href="#karya">Karya</a><a href="#hobi">Hobi</a><a href="#skills">Skill</a><a href="#goals">Cita-cita</a><a href="#contact" class="keep">Kontak</a>
   </div>
+  <button id="theme" aria-label="Ganti tema">🌙</button>
+</nav>
 
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <a href="#home" class="logo"><i class="fas fa-play-circle"></i> AFKARFLIX</a>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Karya</a>
-      <a href="#hobbies">Hobi</a>
-      <a href="#skills">Skills</a>
-      <a href="#goals">Goals</a>
-      <a href="#contact">Contact</a>
-      <button class="theme-toggle" id="themeToggle" title="Ganti Tema"><i class="fas fa-sun"></i></button>
-    </div>
-  </nav>
-
-  <!-- HOME -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <div class="hero-badge"><span>N</span> ORIGINAL PORTFOLIO</div>
+<header id="home" class="hero">
+  <div class="hero-in">
+    <div>
+      <div class="badge"><b>N</b> ORIGINAL PORTFOLIO</div>
       <h1>AFKAR</h1>
       <h2>Afkar Thufail Effendi</h2>
-      <p>Pelajar kelas 9 Ali. Suka makan, main game, baca buku, nonton film, futsal, dan belajar. Selamat datang di profil saya!</p>
-      <div class="hero-btns">
-        <a href="#about" class="btn btn-play"><i class="fas fa-play"></i> Mulai Jelajahi</a>
-        <a href="#projects" class="btn btn-info"><i class="fas fa-info-circle"></i> Lihat Karya</a>
+      <div class="typed" id="typed"></div>
+      <p>Pelajar kelas 9 Ali yang suka makan, main game, baca buku, nonton film, futsal, dan belajar. Selamat datang di profilku!</p>
+      <div class="btns">
+        <a href="#about" class="btn p">▶ Mulai Jelajahi</a>
+        <a href="#karya" class="btn s">Lihat Karya</a>
       </div>
     </div>
-  </section>
+    <div class="poster">
+      <small>AFKARFLIX PRESENTS</small>
+      <div class="big">Season 9</div>
+      <span>Kelas 9 Ali · Episode terbaru tayang sekarang</span>
+    </div>
+  </div>
+</header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2 class="section-title"><i class="fas fa-user"></i> Tentang Saya</h2>
-    <div class="about-grid">
-      <div class="about-text">
-        <h3>Halo, Aku Afkar!</h3>
-        <p>Seorang pelajar kelas 9 Ali yang hobi makan, main game, baca buku, nonton film, dan futsal. Aku juga suka belajar hal baru.</p>
-        <p>Selalu penasaran dan senang mencoba tantangan baru, baik di dunia akademik maupun di waktu luang.</p>
-      </div>
-      <div class="about-details">
-        <div class="detail-item">
-          <i class="fas fa-id-card"></i>
-          <div><strong>Nama Lengkap</strong><br><span>Afkar Thufail Effendi</span></div>
-        </div>
-        <div class="detail-item">
-          <i class="fas fa-smile"></i>
-          <div><strong>Panggilan</strong><br><span>Afkar</span></div>
-        </div>
-        <div class="detail-item">
-          <i class="fas fa-school"></i>
-          <div><strong>Kelas</strong><br><span>9 Ali</span></div>
-        </div>
+<section id="about">
+  <h2 class="title reveal">Tentang Saya</h2>
+  <div class="about reveal">
+    <div class="card">
+      <h3>Halo, aku Afkar! 👋</h3>
+      <p>Seorang pelajar kelas 9 Ali yang hobi makan, main game, baca buku, nonton film, dan futsal. Aku juga suka belajar hal baru.</p>
+      <p>Selalu penasaran dan senang mencoba tantangan baru, baik di dunia akademik maupun di waktu luang.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><i>🪪</i><div><small>Nama Lengkap</small><b>Afkar Thufail Effendi</b></div></div>
+      <div class="fact"><i>😄</i><div><small>Panggilan</small><b>Afkar</b></div></div>
+      <div class="fact"><i>🏫</i><div><small>Kelas</small><b>9 Ali</b></div></div>
+    </div>
+  </div>
+  <div class="stats reveal">
+    <div class="stat"><div class="big">6</div><span>Hobi favorit</span></div>
+    <div class="stat"><div class="big">4</div><span>Karya &amp; minat</span></div>
+    <div class="stat"><div class="big">∞</div><span>Rasa ingin tahu</span></div>
+  </div>
+</section>
+
+<section id="karya">
+  <h2 class="title reveal">Hasil Karya</h2>
+  <div class="row">
+    <div class="pc reveal"><div class="thumb g1">🎮</div><div class="pi"><h4>Game Session &amp; Strategi</h4><p>Bermain game sambil melatih strategi dan kerja sama tim.</p><span class="tag">Game</span><span class="tag">Strategi</span></div></div>
+    <div class="pc reveal"><div class="thumb g2">📚</div><div class="pi"><h4>Koleksi Bacaan</h4><p>Membaca buku untuk menambah wawasan dan pengetahuan.</p><span class="tag">Literasi</span><span class="tag">Baca Buku</span></div></div>
+    <div class="pc reveal"><div class="thumb g3">🎬</div><div class="pi"><h4>Film Pilihan</h4><p>Menonton film sebagai hiburan dan sumber inspirasi.</p><span class="tag">Sinematografi</span><span class="tag">Nonton</span></div></div>
+    <div class="pc reveal"><div class="thumb g4">⚽</div><div class="pi"><h4>Futsal &amp; Kebugaran</h4><p>Bermain futsal untuk menjaga kesehatan dan sportivitas.</p><span class="tag">Olahraga</span><span class="tag">Futsal</span></div></div>
+  </div>
+</section>
+
+<section id="hobi">
+  <h2 class="title reveal">Hobi &amp; Minat</h2>
+  <div class="hobi">
+    <div class="hb reveal"><em>🍔</em><h4>Makan</h4><p>Nikmati berbagai makanan.</p></div>
+    <div class="hb reveal"><em>🎮</em><h4>Main Game</h4><p>Game favorit dan seru.</p></div>
+    <div class="hb reveal"><em>📖</em><h4>Baca Buku</h4><p>Cerita dan pengetahuan.</p></div>
+    <div class="hb reveal"><em>🍿</em><h4>Nonton Film</h4><p>Film seru dan menarik.</p></div>
+    <div class="hb reveal"><em>⚽</em><h4>Futsal</h4><p>Olahraga favorit.</p></div>
+    <div class="hb reveal"><em>🧠</em><h4>Belajar</h4><p>Mencari ilmu baru.</p></div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="title reveal">Kemampuan</h2>
+  <div class="sk">
+    <div class="card reveal">
+      <h3>Hard Skills</h3>
+      <div class="bar"><div><span>Belajar &amp; Akademik</span><span>90%</span></div><div class="track"><div class="fill" data-w="90%"></div></div></div>
+      <div class="bar"><div><span>Main Game &amp; Strategi</span><span>85%</span></div><div class="track"><div class="fill" data-w="85%"></div></div></div>
+      <div class="bar"><div><span>Futsal</span><span>80%</span></div><div class="track"><div class="fill" data-w="80%"></div></div></div>
+      <div class="bar"><div><span>Membaca &amp; Analisis</span><span>78%</span></div><div class="track"><div class="fill" data-w="78%"></div></div></div>
+    </div>
+    <div class="card reveal">
+      <h3>Soft Skills</h3>
+      <div class="chips">
+        <span class="chip">Cepat Belajar</span><span class="chip">Kreativitas</span><span class="chip">Kerja Sama Tim</span>
+        <span class="chip">Manajemen Waktu</span><span class="chip">Komunikasi</span><span class="chip">Problem Solving</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROJECTS / KARYA -->
-  <section id="projects">
-    <h2 class="section-title"><i class="fas fa-video"></i> Hasil Karya</h2>
-    <div class="project-grid">
+<section id="goals">
+  <h2 class="title reveal">Cita-cita &amp; Target</h2>
+  <div class="tl reveal">
+    <div>Terus belajar dan meraih prestasi di sekolah.</div>
+    <div>Mengembangkan diri lewat hobi dan minat.</div>
+    <div>Menjadi pribadi yang bermanfaat bagi orang lain.</div>
+    <div>Melanjutkan pendidikan ke jenjang yang lebih tinggi.</div>
+  </div>
+</section>
 
-      <!-- Karya 1 -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600" alt="Gaming">
-        </div>
-        <div class="project-info">
-          <h4>Game Session & Strategi</h4>
-          <p>Bermain game sambil melatih strategi dan kerja sama tim.</p>
-          <div class="project-meta">
-            <div><span>Minat:</span> Game & Strategi</div>
-            <div><span>Aktivitas:</span> Main Game</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Karya 2 -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600" alt="Membaca Buku">
-        </div>
-        <div class="project-info">
-          <h4>Koleksi Bacaan</h4>
-          <p>Membaca buku untuk menambah wawasan dan pengetahuan.</p>
-          <div class="project-meta">
-            <div><span>Minat:</span> Literasi</div>
-            <div><span>Aktivitas:</span> Baca Buku</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Karya 3 -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=600" alt="Nonton Film">
-        </div>
-        <div class="project-info">
-          <h4>Film Pilihan</h4>
-          <p>Menonton film sebagai hiburan dan sumber inspirasi.</p>
-          <div class="project-meta">
-            <div><span>Minat:</span> Sinematografi</div>
-            <div><span>Aktivitas:</span> Nonton Film</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Karya 4 -->
-      <div class="project-card">
-        <div class="project-img">
-          <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=600" alt="Futsal">
-        </div>
-        <div class="project-info">
-          <h4>Futsal & Kebugaran</h4>
-          <p>Bermain futsal untuk menjaga kesehatan dan sportivitas.</p>
-          <div class="project-meta">
-            <div><span>Minat:</span> Olahraga</div>
-            <div><span>Aktivitas:</span> Futsal</div>
-          </div>
-        </div>
-      </div>
-
+<section id="contact">
+  <div class="card contact reveal">
+    <h2 class="title" style="justify-content:center">Hubungi Saya</h2>
+    <p>Mau ngobrol, kolaborasi, atau sekadar say hi? Hubungi aku lewat media di bawah ini:</p>
+    <div class="cl">
+      <a href="https://instagram.com/afkar" target="_blank" rel="noopener">📸 @afkar</a>
+      <a href="https://tiktok.com/@gataulupa" target="_blank" rel="noopener">🎵 @gataulupa</a>
+      <a href="mailto:afkar.thufail91@smp.belajar.id">✉️ Email</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <h2 class="section-title"><i class="fas fa-star"></i> Kemampuan</h2>
-    <div class="skills-container">
-      <div class="skill-category">
-        <h3>Hard Skills</h3>
-        <div class="skill-item">
-          <div class="skill-label"><span>Belajar & Akademik</span><span>90%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-label"><span>Main Game & Strategi</span><span>85%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-label"><span>Futsal</span><span>80%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-label"><span>Membaca & Analisis</span><span>78%</span></div>
-          <div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div>
-        </div>
-      </div>
-      <div class="skill-category">
-        <h3>Soft Skills</h3>
-        <div class="soft-skills">
-          <span class="soft-tag">Cepat Belajar</span>
-          <span class="soft-tag">Kreativitas</span>
-          <span class="soft-tag">Kerja Sama Tim</span>
-          <span class="soft-tag">Manajemen Waktu</span>
-          <span class="soft-tag">Komunikasi</span>
-          <span class="soft-tag">Problem Solving</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>
+  <p>© 2026 Personal Portfolio · Dibuat oleh <b>Afkar Thufail Effendi</b></p>
+  <p>Kelas 9 Ali</p>
+</footer>
 
-  <!-- HOBBIES -->
-  <section id="hobbies">
-    <h2 class="section-title"><i class="fas fa-gamepad"></i> Hobi & Minat</h2>
-    <div class="hobby-grid">
-      <div class="hobby-card">
-        <i class="fas fa-utensils"></i>
-        <h4>Makan</h4>
-        <p>Nikmati berbagai makanan.</p>
-      </div>
-      <div class="hobby-card">
-        <i class="fas fa-gamepad"></i>
-        <h4>Main Game</h4>
-        <p>Game favorit dan seru.</p>
-      </div>
-      <div class="hobby-card">
-        <i class="fas fa-book"></i>
-        <h4>Baca Buku</h4>
-        <p>Buku cerita dan pengetahuan.</p>
-      </div>
-      <div class="hobby-card">
-        <i class="fas fa-film"></i>
-        <h4>Nonton Film</h4>
-        <p>Film seru dan menarik.</p>
-      </div>
-      <div class="hobby-card">
-        <i class="fas fa-futbol"></i>
-        <h4>Futsal</h4>
-        <p>Olahraga favorit.</p>
-      </div>
-      <div class="hobby-card">
-        <i class="fas fa-brain"></i>
-        <h4>Belajar</h4>
-        <p>Mencari ilmu baru.</p>
-      </div>
-    </div>
-  </section>
+<button id="top" aria-label="Kembali ke atas">↑</button>
 
-  <!-- GOALS -->
-  <section id="goals">
-    <h2 class="section-title"><i class="fas fa-rocket"></i> Cita-cita & Target</h2>
-    <div class="goal-card">
-      <h3>Menuju Masa Depan</h3>
-      <ul>
-        <li><i class="fas fa-chevron-right"></i> Terus belajar dan meraih prestasi di sekolah.</li>
-        <li><i class="fas fa-chevron-right"></i> Mengembangkan diri lewat hobi dan minat.</li>
-        <li><i class="fas fa-chevron-right"></i> Menjadi pribadi yang bermanfaat bagi orang lain.</li>
-        <li><i class="fas fa-chevron-right"></i> Melanjutkan pendidikan ke jenjang yang lebih tinggi.</li>
-      </ul>
-    </div>
-  </section>
+<script>
+// Intro
+const intro=document.getElementById('intro');
+const hide=()=>intro.classList.add('out');
+intro.addEventListener('click',hide);
+const msgs=['Memuat profil...','Menyiapkan karya...','Menyalakan layar...','Siap tayang!'];
+let pct=0;const ibar=document.getElementById('ibar'),ipct=document.getElementById('ipct');
+const tick=setInterval(()=>{
+  pct=Math.min(100,pct+2+Math.random()*4);
+  ibar.style.width=pct+'%';
+  ipct.textContent=msgs[Math.min(3,Math.floor(pct/26))]+' '+Math.floor(pct)+'%';
+  if(pct>=100){clearInterval(tick);setTimeout(hide,500)}
+},70);
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2 class="section-title"><i class="fas fa-envelope"></i> Hubungi Saya</h2>
-    <div class="contact-container">
-      <p>Mau ngobrol, kolaborasi, atau sekadar say hi? Hubungi aku lewat media di bawah ini:</p>
-      <div class="contact-links">
-        <a href="https://instagram.com/afkar" target="_blank" class="contact-btn">
-          <i class="fab fa-instagram"></i> @afkar
-        </a>
-        <a href="https://tiktok.com/@gataulupa" target="_blank" class="contact-btn">
-          <i class="fab fa-tiktok"></i> @gataulupa
-        </a>
-        <a href="mailto:afkar.thufail91@smp.belajar.id" class="contact-btn">
-          <i class="fas fa-envelope"></i> Email
-        </a>
-      </div>
-    </div>
-  </section>
+// Theme
+const root=document.documentElement,tb=document.getElementById('theme');
+const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+const paint=()=>{tb.textContent=isDark()?'☀️':'🌙'};
+try{const s=localStorage.getItem('afkar-theme');if(s)root.dataset.theme=s}catch(e){}
+paint();
+tb.onclick=()=>{const n=isDark()?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('afkar-theme',n)}catch(e){}paint()};
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Personal Portfolio | Created by <strong>Afkar Thufail Effendi</strong></p>
-    <p style="margin-top:0.5rem;">Kelas 9 Ali</p>
-  </footer>
+// Typed text
+const words=['Pelajar Kelas 9','Gamer','Pemain Futsal','Kutu Buku','Pecinta Film'];
+let w=0,c=0,del=false;const el=document.getElementById('typed');
+(function type(){
+  const cur=words[w];c+=del?-1:1;el.textContent=cur.slice(0,c);
+  let d=del?45:90;
+  if(!del&&c===cur.length){del=true;d=1300}
+  else if(del&&c===0){del=false;w=(w+1)%words.length;d=300}
+  setTimeout(type,d);
+})();
 
-  <!-- Back to Top -->
-  <a href="#home" class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></a>
+// Reveal + skill bars
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('in');
+    e.target.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w);io.unobserve(e.target)}
+}),{threshold:.2});
+document.querySelectorAll('.reveal').forEach((r,i)=>{r.style.transitionDelay=(i%4)*80+'ms';io.observe(r)});
 
-  <!-- Scripts -->
-  <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
-    });
-
-    // Back to top button
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('show', window.scrollY > 400);
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const icon = themeToggle.querySelector('i');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      if (document.body.classList.contains('light-mode')) {
-        icon.className = 'fas fa-moon';
-      } else {
-        icon.className = 'fas fa-sun';
-      }
-    });
-
-    // Skill bar animation on scroll
-    const fills = document.querySelectorAll('.skill-fill');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.style.width = e.target.dataset.width;
-      });
-    }, { threshold: 0.4 });
-    fills.forEach(f => obs.observe(f));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', function(e) {
-        const t = document.querySelector(this.getAttribute('href'));
-        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-      });
-    });
-
-    // Welcome overlay cleanup
-    setTimeout(() => {
-      const o = document.querySelector('.welcome-overlay');
-      if (o) o.remove();
-    }, 3000);
-  </script>
+// Back to top
+const toTopBtn=document.getElementById('top');
+addEventListener('scroll',()=>toTopBtn.classList.toggle('show',scrollY>500));
+toTopBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+</script>
 </body>
 </html>
