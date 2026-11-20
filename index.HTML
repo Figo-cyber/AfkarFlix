@@ -81,19 +81,24 @@ section{padding:5rem 4%;max-width:1200px;margin:auto}
 .stat .big{font-size:2.6rem;color:var(--red);line-height:1}
 .stat span{font-size:.8rem;color:var(--muted)}
 
-/* KARYA */
-.row{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.2rem}
-.pc{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:.35s;cursor:pointer}
-.pc:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 20px 40px var(--glow);border-color:var(--red)}
-.thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative}
-.thumb::after{content:"▶";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#fff;background:rgba(0,0,0,.45);opacity:0;transition:.3s}
-.pc:hover .thumb::after{opacity:1}
-.g1{background:linear-gradient(135deg,#7b2ff7,#2a0b5e)}.g2{background:linear-gradient(135deg,#f7971e,#7a3b00)}
-.g3{background:linear-gradient(135deg,#e50914,#4a0207)}.g4{background:linear-gradient(135deg,#11998e,#063b36)}
-.pi{padding:1.1rem}
-.pi h4{font-size:1.05rem;margin-bottom:.3rem}
-.pi p{color:var(--muted);font-size:.85rem;margin-bottom:.8rem}
-.tag{display:inline-block;font-size:.7rem;font-weight:800;padding:.2rem .6rem;border-radius:20px;background:var(--glow);color:var(--red);margin-right:.3rem}
+/* GALERI FILM */
+.films{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.film{position:relative;aspect-ratio:2/3;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid var(--line);
+  background:linear-gradient(160deg,#e50914,#4a0207 60%,#0b0b0d);box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .4s,box-shadow .4s,border-color .4s}
+.film:hover{transform:translateY(-10px) scale(1.04);box-shadow:0 26px 50px var(--glow);border-color:var(--red)}
+.film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.film:hover img{transform:scale(1.1)}
+.film::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.88));pointer-events:none}
+.film::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);transform:translateX(-120%);transition:transform .8s;pointer-events:none}
+.film:hover::after{transform:translateX(120%)}
+.film h4{position:absolute;left:1.1rem;right:1.1rem;bottom:1rem;z-index:3;color:#fff;font-family:'Bebas Neue','Impact',sans-serif;font-weight:400;font-size:1.9rem;letter-spacing:1px;line-height:1.05;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.film .no{position:absolute;top:.8rem;left:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.7rem;letter-spacing:2px;padding:.2rem .6rem;border-radius:4px}
+.film .pl{position:absolute;top:50%;left:50%;z-index:3;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:rgba(229,9,20,.9);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;opacity:0;transform:scale(.5);transition:.35s;box-shadow:0 0 30px var(--glow)}
+.film:hover .pl{opacity:1;transform:scale(1)}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:90;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+#lb.on{display:flex;animation:pop .3s}
+#lb img{max-width:100%;max-height:100%;border-radius:12px}
+@keyframes pop{from{opacity:0;transform:scale(.92)}}
 
 /* HOBI */
 .hobi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
@@ -148,7 +153,6 @@ footer b{color:var(--red)}
 @keyframes fadein{to{opacity:1}}
 @keyframes introAuto{to{opacity:0;visibility:hidden}}
 
-
 @media(max-width:800px){
   .hero-in,.about{grid-template-columns:1fr}
   .poster{max-width:240px;order:-1}
@@ -171,7 +175,7 @@ footer b{color:var(--red)}
 <nav>
   <a href="#home" class="logo">AFKARFLIX</a>
   <div class="links">
-    <a href="#about">Tentang</a><a href="#karya">Karya</a><a href="#hobi">Hobi</a><a href="#skills">Skill</a><a href="#goals">Cita-cita</a><a href="#contact" class="keep">Kontak</a>
+    <a href="#about">Tentang</a><a href="#karya">Film</a><a href="#hobi">Hobi</a><a href="#skills">Skill</a><a href="#goals">Cita-cita</a><a href="#contact" class="keep">Kontak</a>
   </div>
   <button id="theme" aria-label="Ganti tema">🌙</button>
 </nav>
@@ -186,7 +190,7 @@ footer b{color:var(--red)}
       <p>Pelajar kelas 9 Ali yang suka makan, main game, baca buku, nonton film, futsal, dan belajar. Selamat datang di profilku!</p>
       <div class="btns">
         <a href="#about" class="btn p">▶ Mulai Jelajahi</a>
-        <a href="#karya" class="btn s">Lihat Karya</a>
+        <a href="#karya" class="btn s">Lihat Film</a>
       </div>
     </div>
     <div class="poster">
@@ -213,18 +217,17 @@ footer b{color:var(--red)}
   </div>
   <div class="stats reveal">
     <div class="stat"><div class="big">6</div><span>Hobi favorit</span></div>
-    <div class="stat"><div class="big">4</div><span>Karya &amp; minat</span></div>
+    <div class="stat"><div class="big">3</div><span>Film favorit</span></div>
     <div class="stat"><div class="big">∞</div><span>Rasa ingin tahu</span></div>
   </div>
 </section>
 
 <section id="karya">
-  <h2 class="title reveal">Hasil Karya</h2>
-  <div class="row">
-    <div class="pc reveal"><div class="thumb g1">🎮</div><div class="pi"><h4>Game Session &amp; Strategi</h4><p>Bermain game sambil melatih strategi dan kerja sama tim.</p><span class="tag">Game</span><span class="tag">Strategi</span></div></div>
-    <div class="pc reveal"><div class="thumb g2">📚</div><div class="pi"><h4>Koleksi Bacaan</h4><p>Membaca buku untuk menambah wawasan dan pengetahuan.</p><span class="tag">Literasi</span><span class="tag">Baca Buku</span></div></div>
-    <div class="pc reveal"><div class="thumb g3">🎬</div><div class="pi"><h4>Film Pilihan</h4><p>Menonton film sebagai hiburan dan sumber inspirasi.</p><span class="tag">Sinematografi</span><span class="tag">Nonton</span></div></div>
-    <div class="pc reveal"><div class="thumb g4">⚽</div><div class="pi"><h4>Futsal &amp; Kebugaran</h4><p>Bermain futsal untuk menjaga kesehatan dan sportivitas.</p><span class="tag">Olahraga</span><span class="tag">Futsal</span></div></div>
+  <h2 class="title reveal">Galeri Film</h2>
+  <div class="films">
+    <div class="film reveal"><img src="film.png" alt="Insidious Out" loading="lazy"><span class="no">FILM 1</span><span class="pl">▶</span><h4>Insidious Out</h4></div>
+    <div class="film reveal"><img src="film2.png" alt="Other Mommy" loading="lazy"><span class="no">FILM 2</span><span class="pl">▶</span><h4>Other Mommy</h4></div>
+    <div class="film reveal"><img src="film3.png" alt="Ghost in the Cell" loading="lazy"><span class="no">FILM 3</span><span class="pl">▶</span><h4>Ghost in the Cell</h4></div>
   </div>
 </section>
 
@@ -288,13 +291,14 @@ footer b{color:var(--red)}
 </footer>
 
 <button id="top" aria-label="Kembali ke atas">↑</button>
+<div id="lb"><img alt=""></div>
 
 <script>
 // Intro
 const intro=document.getElementById('intro');
 const hide=()=>intro.classList.add('out');
 intro.addEventListener('click',hide);
-const msgs=['Memuat profil...','Menyiapkan karya...','Menyalakan layar...','Siap tayang!'];
+const msgs=['Memuat profil...','Menyiapkan film...','Menyalakan layar...','Siap tayang!'];
 let pct=0;const ibar=document.getElementById('ibar'),ipct=document.getElementById('ipct');
 const tick=setInterval(()=>{
   pct=Math.min(100,pct+2+Math.random()*4);
@@ -328,6 +332,16 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
     e.target.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w);io.unobserve(e.target)}
 }),{threshold:.2});
 document.querySelectorAll('.reveal').forEach((r,i)=>{r.style.transitionDelay=(i%4)*80+'ms';io.observe(r)});
+
+// Film gallery: lightbox + fallback if image missing
+const lb=document.getElementById('lb'),lbi=lb.querySelector('img');
+document.querySelectorAll('.film').forEach(f=>{
+  const im=f.querySelector('img');
+  im.onerror=()=>{im.style.display='none'};
+  f.onclick=()=>{if(im.style.display==='none')return;lbi.src=im.src;lb.classList.add('on')};
+});
+lb.onclick=()=>lb.classList.remove('on');
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
 
 // Back to top
 const toTopBtn=document.getElementById('top');
