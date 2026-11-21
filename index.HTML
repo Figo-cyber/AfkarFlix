@@ -7,346 +7,262 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#f5f5f7;--surface:#fff;--surface2:#ececf0;--text:#16161a;--muted:#5d5d68;--line:#dcdce3;
-  --red:#e50914;--glow:rgba(229,9,20,.18);--nav:rgba(245,245,247,.82);
-  box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0b0b0d;--surface:#17171b;--surface2:#24242a;--text:#f2f2f5;--muted:#a1a1ad;--line:#2c2c34;--glow:rgba(229,9,20,.35);--nav:rgba(11,11,13,.8)}
-}
-:root[data-theme="dark"]{--bg:#0b0b0d;--surface:#17171b;--surface2:#24242a;--text:#f2f2f5;--muted:#a1a1ad;--line:#2c2c34;--glow:rgba(229,9,20,.35);--nav:rgba(11,11,13,.8)}
+:root{--bg:#0a0a0c;--sf:#16161a;--s2:#25252b;--tx:#f4f4f6;--mu:#a3a3ae;--ln:#2d2d35;--red:#e50914;--gl:rgba(229,9,20,.4);--nav:rgba(10,10,12,.8);color-scheme:dark;box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f3f3f6;--sf:#fff;--s2:#e9e9ee;--tx:#15151a;--mu:#5b5b66;--ln:#d9d9e0;--gl:rgba(229,9,20,.22);--nav:rgba(243,243,246,.88);color-scheme:light}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-h1,h2,.logo,.big{font-family:'Bebas Neue','Impact',sans-serif;letter-spacing:1px;font-weight:400}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:1rem;
-  padding:.8rem 4%;padding-top:calc(.8rem + env(safe-area-inset-top,0px));background:var(--nav);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{color:var(--red);font-size:1.8rem;text-decoration:none;text-shadow:0 0 18px var(--glow)}
-.links{display:flex;gap:1.2rem;align-items:center;overflow-x:auto;scrollbar-width:none}
-.links a{color:var(--text);text-decoration:none;font-size:.85rem;font-weight:600;opacity:.75;white-space:nowrap;transition:.2s}
-.links a:hover{opacity:1;color:var(--red)}
-#theme{background:var(--surface2);border:1px solid var(--line);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;flex:none}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 4% 4rem;position:relative;overflow:hidden;
-  background:radial-gradient(60% 60% at 80% 20%,var(--glow),transparent 70%),radial-gradient(50% 50% at 10% 90%,rgba(229,9,20,.14),transparent 70%)}
-.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:60px 60px;opacity:.35;mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent);-webkit-mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent);pointer-events:none}
-.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center;width:100%;max-width:1200px;margin:auto}
-.badge{display:inline-flex;gap:.6rem;align-items:center;font-size:.75rem;font-weight:800;letter-spacing:3px;color:var(--muted);margin-bottom:1rem}
-.badge b{color:var(--red);font-family:'Bebas Neue';font-size:1.6rem;letter-spacing:0}
-.hero h1{font-size:clamp(4.5rem,13vw,9rem);line-height:.9;background:linear-gradient(180deg,var(--text),var(--muted));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero h2{font-family:'Inter';font-weight:600;font-size:1.3rem;margin:.8rem 0}
-.typed{color:var(--red);font-weight:800;min-height:1.6em;font-size:1.1rem}
-.typed::after{content:"▍";animation:blink 1s infinite}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.bn{font-family:'Bebas Neue','Impact',sans-serif;font-weight:400;letter-spacing:1px}
+@keyframes drawy{from{transform:scaleY(0)}}
+@keyframes drawx{from{transform:scaleX(0)}}
+@keyframes burst{0%{transform:scale(0) rotate(0);opacity:1}100%{transform:scale(1) rotate(40deg);opacity:0}}
+@keyframes tudum{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes glow{50%{filter:drop-shadow(0 0 46px #e50914)}100%{filter:drop-shadow(0 0 18px rgba(229,9,20,.7))}}
+@keyframes wmk{from{opacity:0;letter-spacing:.1em}to{opacity:1;letter-spacing:.5em}}
+@keyframes fu{from{opacity:0;transform:translateY(34px)}}
+@keyframes drift{50%{transform:translate(60px,-40px) scale(1.2)}}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
 @keyframes blink{50%{opacity:0}}
-.hero p{color:var(--muted);max-width:480px;margin:1rem 0 2rem}
-.btns{display:flex;gap:.8rem;flex-wrap:wrap}
-.btn{padding:.85rem 1.8rem;border-radius:6px;font-weight:800;text-decoration:none;font-size:.95rem;transition:.25s;display:inline-block}
-.btn.p{background:var(--red);color:#fff;box-shadow:0 8px 28px var(--glow)}
-.btn.p:hover{transform:translateY(-3px);box-shadow:0 12px 34px var(--glow)}
-.btn.s{background:var(--surface2);color:var(--text);border:1px solid var(--line)}
-.btn.s:hover{transform:translateY(-3px)}
-.poster{aspect-ratio:3/4;max-width:320px;margin:auto;border-radius:14px;background:linear-gradient(160deg,#e50914,#6b0309 55%,#14040a);
-  display:flex;flex-direction:column;justify-content:flex-end;padding:1.6rem;color:#fff;position:relative;overflow:hidden;
-  box-shadow:0 30px 70px var(--glow);transform:rotate(3deg);transition:.4s;animation:float 5s ease-in-out infinite}
-.poster:hover{transform:rotate(0) scale(1.04)}
-.poster::before{content:"A";position:absolute;top:-1.5rem;right:-.5rem;font-family:'Bebas Neue';font-size:15rem;opacity:.18;line-height:1}
-.poster small{letter-spacing:3px;font-weight:800;opacity:.8;font-size:.7rem}
-.poster .big{font-size:3.4rem;line-height:1}
-.poster span{font-size:.85rem;opacity:.85}
-@keyframes float{50%{translate:0 -12px}}
-
-/* SECTIONS */
-section{padding:5rem 4%;max-width:1200px;margin:auto}
-.title{font-size:2.4rem;margin-bottom:2rem;display:flex;align-items:center;gap:.8rem}
-.title::before{content:"";width:6px;height:2.2rem;background:var(--red);border-radius:3px;box-shadow:0 0 16px var(--glow)}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.6rem}
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
-.reveal.in{opacity:1;transform:none}
-
-/* ABOUT */
-.about{display:grid;grid-template-columns:1.3fr 1fr;gap:1.5rem}
-.about h3{font-size:1.6rem;margin-bottom:.8rem}
-.about p{color:var(--muted);margin-bottom:.8rem}
-.facts{display:grid;gap:.8rem}
-.fact{display:flex;gap:1rem;align-items:center;padding:.9rem 1rem;background:var(--surface2);border-radius:10px}
-.fact i{font-style:normal;font-size:1.5rem}
-.fact small{color:var(--muted);display:block;font-size:.75rem}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}
-.stat{text-align:center;padding:1.2rem;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
-.stat .big{font-size:2.6rem;color:var(--red);line-height:1}
-.stat span{font-size:.8rem;color:var(--muted)}
-
-/* GALERI FILM */
-.films{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
-.film{position:relative;aspect-ratio:2/3;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid var(--line);
-  background:linear-gradient(160deg,#e50914,#4a0207 60%,#0b0b0d);box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .4s,box-shadow .4s,border-color .4s}
-.film:hover{transform:translateY(-10px) scale(1.04);box-shadow:0 26px 50px var(--glow);border-color:var(--red)}
-.film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s}
-.film:hover img{transform:scale(1.1)}
-.film::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.88));pointer-events:none}
-.film::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);transform:translateX(-120%);transition:transform .8s;pointer-events:none}
-.film:hover::after{transform:translateX(120%)}
-.film h4{position:absolute;left:1.1rem;right:1.1rem;bottom:1rem;z-index:3;color:#fff;font-family:'Bebas Neue','Impact',sans-serif;font-weight:400;font-size:1.9rem;letter-spacing:1px;line-height:1.05;text-shadow:0 2px 14px rgba(0,0,0,.7)}
-.film .no{position:absolute;top:.8rem;left:.9rem;z-index:3;background:var(--red);color:#fff;font-weight:800;font-size:.7rem;letter-spacing:2px;padding:.2rem .6rem;border-radius:4px}
-.film .pl{position:absolute;top:50%;left:50%;z-index:3;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:rgba(229,9,20,.9);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;opacity:0;transform:scale(.5);transition:.35s;box-shadow:0 0 30px var(--glow)}
-.film:hover .pl{opacity:1;transform:scale(1)}
-#lb{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:90;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
-#lb.on{display:flex;animation:pop .3s}
-#lb img{max-width:100%;max-height:100%;border-radius:12px}
-@keyframes pop{from{opacity:0;transform:scale(.92)}}
-
-/* HOBI */
-.hobi{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem}
-.hb{text-align:center;padding:1.6rem 1rem;border-radius:14px;background:var(--surface);border:1px solid var(--line);transition:.3s;position:relative;overflow:hidden}
-.hb:hover{transform:translateY(-6px) rotate(-1deg);border-color:var(--red)}
-.hb em{font-style:normal;font-size:2.4rem;display:block;margin-bottom:.4rem;transition:.3s}
-.hb:hover em{transform:scale(1.25) rotate(8deg)}
-.hb h4{font-size:1rem}.hb p{color:var(--muted);font-size:.78rem}
-
-/* SKILLS */
-.sk{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.sk h3{margin-bottom:1.3rem;font-size:1.2rem}
-.bar{margin-bottom:1.1rem}
-.bar div:first-child{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:.4rem;color:var(--muted)}
-.track{height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
-.fill{height:100%;width:0;background:linear-gradient(90deg,#8f0610,var(--red));border-radius:6px;transition:width 1.6s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px var(--glow)}
-.chips{display:flex;flex-wrap:wrap;gap:.6rem}
-.chip{padding:.5rem 1rem;border-radius:30px;background:var(--surface2);font-size:.85rem;font-weight:600;transition:.25s;border:1px solid transparent}
-.chip:hover{background:var(--red);color:#fff;transform:scale(1.07)}
-
-/* GOALS */
-.tl{position:relative;padding-left:2rem;display:grid;gap:1.2rem}
-.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--red),transparent)}
-.tl div{position:relative;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:12px}
-.tl div::before{content:"";position:absolute;left:-2rem;top:1.3rem;width:16px;height:16px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px var(--glow)}
-
-/* CONTACT */
-.contact{text-align:center;background:radial-gradient(70% 120% at 50% 0,var(--glow),transparent),var(--surface)}
-.contact p{color:var(--muted);margin-bottom:1.6rem}
-.cl{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-.cl a{padding:.9rem 1.6rem;border-radius:10px;background:var(--surface2);color:var(--text);text-decoration:none;font-weight:600;transition:.3s;border:1px solid var(--line)}
-.cl a:hover{background:var(--red);color:#fff;transform:translateY(-4px)}
-footer{text-align:center;padding:2.5rem 4%;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
-footer b{color:var(--red)}
-#top{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 6px 20px var(--glow);z-index:40}
-#top.show{opacity:1;pointer-events:auto}
-
-/* INTRO */
-#intro{position:fixed;inset:0;z-index:100;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .7s,visibility .7s;cursor:pointer}
-#intro.out{opacity:0;visibility:hidden}
-#intro{animation:introAuto .7s 4.2s forwards;flex-direction:column;gap:1.6rem;overflow:hidden;background:radial-gradient(55% 45% at 50% 50%,rgba(229,9,20,.28),#000 70%)}
-#intro::before{content:"";position:absolute;top:50%;left:-40%;width:40%;height:2px;background:linear-gradient(90deg,transparent,#e50914,transparent);box-shadow:0 0 30px 6px rgba(229,9,20,.6);animation:sweep 1.8s .9s ease-in-out forwards;opacity:0}
-@keyframes sweep{0%{left:-40%;opacity:1}100%{left:110%;opacity:1}}
-.il{display:flex;gap:.15em;font-family:'Bebas Neue','Impact',sans-serif;font-size:clamp(4rem,17vw,9rem);color:#e50914;letter-spacing:6px;line-height:1;text-shadow:0 0 40px rgba(229,9,20,.75)}
-.il span{display:inline-block;opacity:0;transform:translateY(50px) scale(.7);filter:blur(8px);animation:letter .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * .13s + .2s)}
-@keyframes letter{to{opacity:1;transform:none;filter:none}}
-.itag{color:#8a8a8a;font-size:.75rem;font-weight:800;letter-spacing:6px;opacity:0;animation:fadein .8s 1s forwards}
-.ib{width:min(260px,60vw);height:4px;background:#222;border-radius:4px;overflow:hidden;opacity:0;animation:fadein .5s .8s forwards}
-.ib i{display:block;height:100%;width:0;background:#e50914;box-shadow:0 0 12px #e50914;border-radius:4px}
-.ip{color:#bbb;font-size:.8rem;font-weight:600;letter-spacing:2px;opacity:0;animation:fadein .5s .8s forwards;min-height:1.2em}
-.iskip{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom,0px));color:#555;font-size:.7rem;letter-spacing:2px}
-@keyframes fadein{to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes flt{50%{translate:0 -14px}}
+@keyframes pop{from{opacity:0;transform:scale(.9)}}
+@keyframes zoom2{from{transform:scale(1.6);opacity:0}}
 @keyframes introAuto{to{opacity:0;visibility:hidden}}
-
-@media(max-width:800px){
-  .hero-in,.about{grid-template-columns:1fr}
-  .poster{max-width:240px;order:-1}
-  .links a:not(:last-child){display:none}.links a.keep{display:block}
-  .hero{padding-top:6rem}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+svg.lgs{width:100%;height:auto;display:block;overflow:visible}
+.lgs .a{transform-box:fill-box;transform-origin:50% 0;animation:drawy .7s cubic-bezier(.2,.8,.2,1) both}
+.lgs .l{animation-delay:.3s}.lgs .r{animation-delay:.6s}
+.lgs .c{transform-origin:50% 50%;animation:drawx .5s 1s both}
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;cursor:pointer;overflow:hidden;transition:opacity .7s,visibility .7s;animation:introAuto .7s 6s forwards}
+#intro.out{opacity:0;visibility:hidden}
+.rays{position:absolute;width:150vmax;height:150vmax;background:repeating-conic-gradient(rgba(229,9,20,.4) 0 4deg,transparent 4deg 12deg);-webkit-mask-image:radial-gradient(circle,#000,transparent 55%);mask-image:radial-gradient(circle,#000,transparent 55%);transform:scale(0);animation:burst 2.8s 1.2s ease-out forwards}
+#intro .lg{width:min(150px,36vw);position:relative;animation:tudum .5s 1.3s}
+#intro .lgs{animation:glow 1.2s 1.3s forwards}
+.wm2{position:relative;font:400 clamp(1.6rem,6vw,2.4rem) 'Bebas Neue';color:var(--red);opacity:0;animation:wmk 1s 1.6s forwards;text-shadow:0 0 24px var(--gl)}
+.iskip{position:absolute;bottom:calc(22px + env(safe-area-inset-bottom,0px));color:#555;font-size:.7rem;letter-spacing:3px}
+#who{position:fixed;inset:0;z-index:98;background:radial-gradient(60% 50% at 50% 40%,#2a0508,#000);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;text-align:center;padding:20px;transition:opacity .6s,transform .6s,visibility .6s}
+#who.out{opacity:0;visibility:hidden;transform:scale(1.25)}
+#who h1{font-size:clamp(2.2rem,7vw,3.6rem);color:#f4f4f6}
+.pf{display:flex;gap:clamp(.8rem,3vw,2rem);flex-wrap:wrap;justify-content:center}
+.pf button{background:none;border:0;color:#aaa;font:600 1rem Inter;cursor:pointer;display:grid;gap:.6rem;justify-items:center;transition:.3s}
+.pf i{font-style:normal;width:clamp(86px,22vw,130px);aspect-ratio:1;border-radius:14px;display:grid;place-items:center;font-size:3.4rem;background:var(--c);border:3px solid transparent;transition:.3s;animation:flt 4s ease-in-out infinite;animation-delay:var(--d)}
+.pf button:hover{color:#fff}.pf button:hover i{border-color:#fff;transform:scale(1.12);box-shadow:0 0 40px var(--c)}
+.grain{position:fixed;inset:-50%;z-index:40;pointer-events:none;opacity:.06;background:repeating-radial-gradient(circle at 17% 32%,#fff 0 .6px,transparent .6px 3px);animation:grain .5s steps(4) infinite}
+#pg{position:fixed;top:0;left:0;height:3px;width:0;background:var(--red);box-shadow:0 0 12px var(--red);z-index:60}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:1.4rem;padding:.7rem 4%;padding-top:calc(.7rem + env(safe-area-inset-top,0px));background:linear-gradient(var(--nav),transparent);backdrop-filter:blur(8px)}
+.nl{display:flex;align-items:center;gap:.5rem;color:var(--red);font:400 1.8rem 'Bebas Neue';text-decoration:none;text-shadow:0 0 18px var(--gl)}
+.nl .lgs{width:20px}.nl .a{animation:none}
+.links{display:flex;gap:1.1rem;flex:1;overflow-x:auto;scrollbar-width:none}
+.links a{color:var(--tx);text-decoration:none;font-size:.82rem;font-weight:600;opacity:.7;white-space:nowrap;transition:.2s}
+.links a:hover{opacity:1;color:var(--red)}
+#theme{background:var(--s2);border:1px solid var(--ln);border-radius:50%;width:34px;height:34px;cursor:pointer;flex:none}
+.av{width:34px;height:34px;border-radius:6px;background:var(--red);display:grid;place-items:center;flex:none}
+.bill{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;padding:7rem 4% 5rem;background:linear-gradient(90deg,var(--bg) 25%,transparent),radial-gradient(70% 70% at 85% 30%,#5a0a10,transparent 70%),var(--bg)}
+.bill::after{content:"";position:absolute;left:0;right:0;bottom:0;height:35%;background:linear-gradient(transparent,var(--bg))}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);background:var(--red);opacity:.28;animation:drift 12s ease-in-out infinite}
+.wm{position:absolute;right:5%;top:50%;height:68%;aspect-ratio:5/6;transform:translateY(-50%);opacity:.16;animation:flt 6s ease-in-out infinite}
+.wm .a{animation:none}
+.bi{position:relative;z-index:3;max-width:620px}
+.fu{animation:fu .9s both paused;animation-delay:calc(var(--k)*.12s + .2s)}
+body.go .fu{animation-play-state:running}
+.ser{display:flex;align-items:center;gap:.6rem;font-size:.75rem;font-weight:800;letter-spacing:4px;color:var(--mu)}
+.ser b{color:var(--red);font:400 1.8rem 'Bebas Neue';letter-spacing:0}
+.bill h1{font-size:clamp(5rem,16vw,10.5rem);line-height:.88;color:var(--tx);text-shadow:0 0 50px var(--gl),4px 4px 0 var(--red)}
+.bill h2{font:600 1.25rem Inter;letter-spacing:0;margin:.8rem 0 .3rem}
+.meta{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;font-size:.8rem;font-weight:800;margin-bottom:.4rem}
+.meta b{color:#46d369}.meta span{border:1px solid var(--mu);padding:0 .45rem;border-radius:3px;color:var(--mu)}
+.typed{color:var(--red);font-weight:800;min-height:1.6em}
+.typed::after{content:"▍";animation:blink 1s infinite}
+.bill p{color:var(--mu);margin:.8rem 0 1.8rem;max-width:480px}
+.btn{display:inline-flex;gap:.5rem;align-items:center;padding:.8rem 1.7rem;border-radius:6px;font-weight:800;text-decoration:none;transition:.25s;margin:0 .6rem .6rem 0}
+.btn.p{background:#fff;color:#000}.btn.p:hover{background:var(--red);color:#fff;transform:scale(1.06);box-shadow:0 8px 30px var(--gl)}
+.btn.s{background:rgba(109,109,110,.55);color:#fff;backdrop-filter:blur(6px)}.btn.s:hover{background:rgba(109,109,110,.9);transform:scale(1.06)}
+.row{position:relative;z-index:3;margin-bottom:2.2rem}
+.row h3{font-size:1.9rem;padding:0 4%;display:flex;align-items:center;gap:.6rem}
+.row h3::after{content:"›";color:var(--red);transition:.3s}.row:hover h3::after{transform:translateX(8px)}
+.rw{position:relative}
+.rail{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x proximity;padding:1.4rem 4% 2rem;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.ar{position:absolute;top:1.4rem;bottom:2rem;width:4%;z-index:8;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:2rem;cursor:pointer;opacity:0;transition:.3s}
+.ar.l{left:0}.ar.r{right:0}.rw:hover .ar{opacity:1}
+.cd{flex:none;scroll-snap-align:start;border-radius:12px;position:relative;transition:transform .35s,box-shadow .35s;background:var(--sf);border:1px solid var(--ln)}
+.cd:hover{transform:scale(1.07);z-index:4;box-shadow:0 20px 44px var(--gl);border-color:var(--red)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}.rv.in{opacity:1;transform:none}
+.cd.bio{width:min(420px,80vw);padding:1.5rem}.bio h4{font:400 1.7rem 'Bebas Neue';margin-bottom:.5rem}.bio p{color:var(--mu);margin-bottom:.6rem;font-size:.95rem}
+.cd.inf{width:200px;padding:1.4rem;display:grid;gap:.3rem;align-content:center;background:linear-gradient(150deg,var(--c),#0b0b0d)}
+.inf i{font-style:normal;font-size:2.4rem}.inf small{color:#ddd;opacity:.8;font-size:.72rem;letter-spacing:2px}.inf b{color:#fff;font-size:1.05rem}
+.cd.st{width:150px;text-align:center;padding:1.2rem}.st .bn{font-size:3.4rem;color:var(--red);line-height:1;text-shadow:0 0 24px var(--gl)}.st span{font-size:.8rem;color:var(--mu)}
+.cd.fm{width:230px;aspect-ratio:2/3;overflow:hidden;cursor:pointer;background:linear-gradient(160deg,#e50914,#4a0207 60%,#0b0b0d)}
+.fm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}.fm:hover img{transform:scale(1.1)}
+.fm .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:4rem;opacity:.35}
+.fm::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 45%,rgba(0,0,0,.92))}
+.fm .nx{position:absolute;top:.7rem;left:.7rem;z-index:3;color:var(--red);font:400 1.1rem 'Bebas Neue';letter-spacing:3px}
+.fm h4{position:absolute;left:1rem;right:1rem;bottom:2rem;z-index:3;color:#fff;font:400 1.8rem/1.05 'Bebas Neue';text-shadow:0 2px 12px #000}
+.fm .mt{position:absolute;left:1rem;bottom:.7rem;z-index:3;color:#46d369;font-weight:800;font-size:.72rem;opacity:0;transition:.3s}.fm:hover .mt{opacity:1}
+.fm .pl{position:absolute;top:50%;left:50%;z-index:3;width:56px;height:56px;margin:-28px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.5);color:#fff;display:grid;place-items:center;opacity:0;transform:scale(.5);transition:.3s}.fm:hover .pl{opacity:1;transform:none}
+.cd.hb{width:170px;height:190px;padding:1.2rem;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(160deg,var(--c),#0b0b0d 85%);overflow:hidden}
+.hb em{position:absolute;top:.8rem;right:.8rem;font-style:normal;font-size:3rem;transition:.4s}.hb:hover em{transform:scale(1.35) rotate(10deg)}
+.hb h4{font:400 1.6rem 'Bebas Neue';color:#fff}.hb p{color:#ddd;font-size:.78rem;line-height:1.35}
+.cd.rg{width:170px;padding:1.3rem;text-align:center;display:grid;justify-items:center;gap:.7rem}
+.ring{--p:0;width:104px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--red) calc(var(--p)*1%),var(--s2) 0);display:grid;place-items:center;position:relative;filter:drop-shadow(0 0 10px var(--gl))}
+.ring::before{content:"";position:absolute;inset:10px;border-radius:50%;background:var(--sf)}.ring b{position:relative;font:400 1.9rem 'Bebas Neue'}
+.rg small{font-weight:600;color:var(--mu);font-size:.82rem}
+.chips{display:flex;flex-wrap:wrap;gap:.7rem;padding:1.2rem 4% 0}
+.chip{padding:.55rem 1.2rem;border-radius:30px;background:var(--s2);font-weight:600;font-size:.85rem;transition:.25s;border:1px solid var(--ln)}.chip:hover{background:var(--red);color:#fff;transform:scale(1.1) rotate(-2deg)}
+.cd.t10{width:min(330px,82vw);display:flex;align-items:center;background:none;border:0;overflow:visible}
+.t10:hover{box-shadow:none}
+.t10 .n{font:400 9.5rem/.8 'Bebas Neue';color:transparent;-webkit-text-stroke:4px #666;margin-right:-.5rem;transition:.4s;flex:none}
+.t10:hover .n{-webkit-text-stroke-color:var(--red);transform:scale(1.1)}
+.t10 .tx{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:1rem;font-size:.92rem;position:relative;z-index:2;min-height:150px;display:flex;align-items:center}
+.end{margin:1rem 4% 0;position:relative;z-index:3;text-align:center;padding:3.2rem 1.4rem;border-radius:18px;border:1px solid var(--ln);background:radial-gradient(70% 120% at 50% 0,var(--gl),transparent),var(--sf)}
+.end h2{font-size:clamp(2.2rem,6vw,3.4rem);margin-bottom:.4rem}.end p{color:var(--mu);margin-bottom:1.6rem}
+.cl{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.cl a{padding:.9rem 1.6rem;border-radius:8px;background:var(--s2);color:var(--tx);text-decoration:none;font-weight:600;transition:.3s;border:1px solid var(--ln)}.cl a:hover{background:var(--red);color:#fff;transform:translateY(-5px) scale(1.05)}
+footer{text-align:center;padding:3rem 4% 2rem;color:var(--mu);font-size:.85rem;position:relative;z-index:3}footer b{color:var(--red)}
+#top{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;border:0;font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 6px 20px var(--gl);z-index:45}#top.show{opacity:1;pointer-events:auto}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:90;display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}#lb.on{display:flex;animation:pop .3s}#lb img{max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 0 60px var(--gl)}
+#tr{position:fixed;inset:0;z-index:95;background:#000;opacity:0;visibility:hidden;transition:opacity .3s;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#tr.on{opacity:1;visibility:visible}#tr.on.fade{opacity:0;transition:opacity .5s}
+#tr.ex::before{content:"";position:absolute;width:150vmax;height:150vmax;background:repeating-conic-gradient(rgba(229,9,20,.4) 0 4deg,transparent 4deg 12deg);-webkit-mask-image:radial-gradient(circle,#000,transparent 55%);mask-image:radial-gradient(circle,#000,transparent 55%);transform:scale(0);animation:burst 1.8s .5s ease-out forwards}
+.tc{position:relative;z-index:2;text-align:center;color:#fff;display:grid;justify-items:center;gap:1.2rem}
+.tc .lg{width:min(110px,28vw);animation:tudum .4s .8s}
+.tc .l{animation-delay:.1s!important}.tc .r{animation-delay:.3s!important}.tc .c{animation-delay:.6s!important}
+.tc small{letter-spacing:6px;font-weight:800;color:#bbb;font-size:.75rem}
+.cring{width:min(230px,58vw);aspect-ratio:1;border-radius:50%;border:4px solid var(--red);display:grid;place-items:center;position:relative;box-shadow:0 0 50px var(--gl),inset 0 0 40px var(--gl)}
+.cring::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(rgba(229,9,20,.55) 0 90deg,transparent 90deg);animation:spin .38s linear infinite}
+.cring::after{content:"";position:absolute;inset:-22px;opacity:.5;background:linear-gradient(var(--red),var(--red)) center/2px 100% no-repeat,linear-gradient(var(--red),var(--red)) center/100% 2px no-repeat}
+.cring b{position:relative;z-index:2;font:400 7.5rem 'Bebas Neue';animation:zoom2 .38s both}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.12em;flex:none}
+.av{color:#fff;font-size:1.1rem}.pf i{color:#fff}.inf i,.hb em{color:#fff}.hb em{opacity:.9}.fm .pl{font-size:1.3rem}.btn .ic{width:1.1em;height:1.1em}.cl a{display:inline-flex;align-items:center;gap:.5rem}#theme{font-size:1rem;color:var(--tx);display:grid;place-items:center}
+@media(max-width:800px){.links a:not(.k){display:none}.wm{opacity:.1;right:-20%}.bill{padding-top:6rem}.ar{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b20710"/><stop offset="1" stop-color="#5a0309"/></linearGradient>
+<linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff4d55"/><stop offset="1" stop-color="#e50914"/></linearGradient>
+<linearGradient id="gc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e50914"/><stop offset="1" stop-color="#8f0610"/></linearGradient>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 15-5 16 0"/></symbol><symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol><symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.5-2 5.5-2 6 0M14 10h4M14 14h4"/></symbol><symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14c1 2 7 2 8 0M9 9.5h.01M15 9.5h.01"/></symbol><symbol id="i-school" viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6M12 10h.01"/></symbol><symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 11a8 6 0 0 1 16 0zM3 14h18M5 17h14l-1 2.500a1 1 0 0 1-1 .5H7a1 1 0 0 1-1-.5z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><path d="M6 8h12a4 4 0 0 1 4 4v3a3 3 0 0 1-5 2l-2-2H9l-2 2a3 3 0 0 1-5-2v-3a4 4 0 0 1 4-4zM7 11v4M5 13h4M16 12h.01M18 14h.01"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H3zM21 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></symbol><symbol id="i-popcorn" viewBox="0 0 24 24"><path d="M6 10h12l-1.500 10h-9zM6 10a3 3 0 0 1 3-4 3 3 0 0 1 6 0 3 3 0 0 1 3 4M10 10l.5 10M14 10l-.5 10"/></symbol><symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7l4 3-1.500 5h-5L8 10zM12 3v4M16 10l4-1M14.500 15l2.500 4M9.500 15L7 19M8 10L4 9"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.500c.7.7 1 1.500 1 2.500h6c0-1 .3-1.800 1-2.500A6 6 0 0 0 12 3z"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l2-3h4l2 3"/><circle cx="12" cy="13" r="3.500"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3zM19 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol></defs></svg>
 
-<div id="intro" title="Klik untuk lewati">
-  <div class="il"><span style="--i:0">A</span><span style="--i:1">F</span><span style="--i:2">K</span><span style="--i:3">A</span><span style="--i:4">R</span></div>
-  <div class="itag">ORIGINAL PORTFOLIO</div>
-  <div class="ib"><i id="ibar"></i></div>
-  <div class="ip" id="ipct">Memuat profil... 0%</div>
-  <div class="iskip">KETUK UNTUK LEWATI</div>
-</div>
+<div id="intro" title="Klik untuk lewati"></div>
+<div id="who"><h1>Siapa yang menonton?</h1>
+<div class="pf">
+<button data-p><i style="--c:#e50914;--d:0s"><svg class="ic"><use href="#i-user"/></svg></i>Afkar</button>
+<button data-p><i style="--c:#2f6fe0;--d:-1s"><svg class="ic"><use href="#i-popcorn"/></svg></i>Tamu</button>
+<button data-p><i style="--c:#e0a62f;--d:-2s"><svg class="ic"><use href="#i-game"/></svg></i>Teman</button>
+</div></div>
+<div id="tr" aria-hidden="true"><div class="tc" id="tc"></div></div>
+<div class="grain"></div><div id="pg"></div>
 
 <nav>
-  <a href="#home" class="logo">AFKARFLIX</a>
-  <div class="links">
-    <a href="#about">Tentang</a><a href="#karya">Film</a><a href="#hobi">Hobi</a><a href="#skills">Skill</a><a href="#goals">Cita-cita</a><a href="#contact" class="keep">Kontak</a>
-  </div>
-  <button id="theme" aria-label="Ganti tema">🌙</button>
+<a href="#home" class="nl" id="nl">AFKARFLIX</a>
+<div class="links"><a href="#about">Tentang</a><a href="#karya">Film</a><a href="#hobi">Hobi</a><a href="#skills">Skill</a><a href="#goals">Cita-cita</a><a href="#contact" class="k">Kontak</a></div>
+<button id="theme" aria-label="Ganti tema"><svg class="ic"><use href="#i-sun"/></svg></button><div class="av"><svg class="ic"><use href="#i-user"/></svg></div>
 </nav>
 
-<header id="home" class="hero">
-  <div class="hero-in">
-    <div>
-      <div class="badge"><b>N</b> ORIGINAL PORTFOLIO</div>
-      <h1>AFKAR</h1>
-      <h2>Afkar Thufail Effendi</h2>
-      <div class="typed" id="typed"></div>
-      <p>Pelajar kelas 9 Ali yang suka makan, main game, baca buku, nonton film, futsal, dan belajar. Selamat datang di profilku!</p>
-      <div class="btns">
-        <a href="#about" class="btn p">▶ Mulai Jelajahi</a>
-        <a href="#karya" class="btn s">Lihat Film</a>
-      </div>
-    </div>
-    <div class="poster">
-      <small>AFKARFLIX PRESENTS</small>
-      <div class="big">Season 9</div>
-      <span>Kelas 9 Ali · Episode terbaru tayang sekarang</span>
-    </div>
-  </div>
+<header id="home" class="bill">
+<div class="blob" style="width:360px;height:360px;right:10%;top:10%"></div>
+<div class="blob" style="width:260px;height:260px;left:-5%;bottom:5%;animation-delay:-5s"></div>
+<div class="wm" id="wm"></div>
+<div class="bi">
+<div class="ser fu" style="--k:0"><b>A</b> SERI ORIGINAL</div>
+<h1 class="fu" style="--k:1">AFKAR</h1>
+<h2 class="fu" style="--k:2">Afkar Thufail Effendi</h2>
+<div class="meta fu" style="--k:3"><b>98% Cocok</b><span>SMP</span><span>Kelas 9 Ali</span><span>HD</span></div>
+<div class="typed fu" style="--k:3" id="typed"></div>
+<p class="fu" style="--k:4">Pelajar kelas 9 Ali yang suka makan, main game, baca buku, nonton film, futsal, dan belajar. Selamat datang di profilku!</p>
+<div class="fu" style="--k:5"><a href="#about" class="btn p" data-go="ex"><svg class="ic"><use href="#i-play"/></svg> Mulai Jelajahi</a><a href="#karya" class="btn s" data-go="cd"><svg class="ic"><use href="#i-film"/></svg> Lihat Film</a></div>
+</div>
 </header>
 
-<section id="about">
-  <h2 class="title reveal">Tentang Saya</h2>
-  <div class="about reveal">
-    <div class="card">
-      <h3>Halo, aku Afkar! 👋</h3>
-      <p>Seorang pelajar kelas 9 Ali yang hobi makan, main game, baca buku, nonton film, dan futsal. Aku juga suka belajar hal baru.</p>
-      <p>Selalu penasaran dan senang mencoba tantangan baru, baik di dunia akademik maupun di waktu luang.</p>
-    </div>
-    <div class="facts">
-      <div class="fact"><i>🪪</i><div><small>Nama Lengkap</small><b>Afkar Thufail Effendi</b></div></div>
-      <div class="fact"><i>😄</i><div><small>Panggilan</small><b>Afkar</b></div></div>
-      <div class="fact"><i>🏫</i><div><small>Kelas</small><b>9 Ali</b></div></div>
-    </div>
-  </div>
-  <div class="stats reveal">
-    <div class="stat"><div class="big">6</div><span>Hobi favorit</span></div>
-    <div class="stat"><div class="big">3</div><span>Film favorit</span></div>
-    <div class="stat"><div class="big">∞</div><span>Rasa ingin tahu</span></div>
-  </div>
-</section>
+<div class="row rv" id="about"><h3>Tentang Saya</h3><div class="rw"><button class="ar l">‹</button><div class="rail">
+<div class="cd bio"><h4>Halo, aku Afkar!</h4><p>Seorang pelajar kelas 9 Ali yang hobi makan, main game, baca buku, nonton film, dan futsal. Aku juga suka belajar hal baru.</p><p>Selalu penasaran dan senang mencoba tantangan baru, baik di dunia akademik maupun di waktu luang.</p></div>
+<div class="cd inf" style="--c:#8f0610"><i><svg class="ic"><use href="#i-id"/></svg></i><small>NAMA LENGKAP</small><b>Afkar Thufail Effendi</b></div>
+<div class="cd inf" style="--c:#1d4fa8"><i><svg class="ic"><use href="#i-smile"/></svg></i><small>PANGGILAN</small><b>Afkar</b></div>
+<div class="cd inf" style="--c:#177a4b"><i><svg class="ic"><use href="#i-school"/></svg></i><small>KELAS</small><b>9 Ali</b></div>
+<div class="cd st"><div class="bn" data-n="6">0</div><span>Hobi favorit</span></div>
+<div class="cd st"><div class="bn" data-n="3">0</div><span>Film favorit</span></div>
+<div class="cd st"><div class="bn">∞</div><span>Rasa ingin tahu</span></div>
+</div><button class="ar r">›</button></div></div>
 
-<section id="karya">
-  <h2 class="title reveal">Galeri Film</h2>
-  <div class="films">
-    <div class="film reveal"><img src="film.png" alt="Insidious Out" loading="lazy"><span class="no">FILM 1</span><span class="pl">▶</span><h4>Insidious Out</h4></div>
-    <div class="film reveal"><img src="film2.png" alt="Other Mommy" loading="lazy"><span class="no">FILM 2</span><span class="pl">▶</span><h4>Other Mommy</h4></div>
-    <div class="film reveal"><img src="film3.png" alt="Ghost in the Cell" loading="lazy"><span class="no">FILM 3</span><span class="pl">▶</span><h4>Ghost in the Cell</h4></div>
-  </div>
-</section>
+<div class="row rv" id="karya"><h3>Galeri Film · Pilihan Afkar</h3><div class="rw"><button class="ar l">‹</button><div class="rail">
+<div class="cd fm"><div class="ph"><svg class="ic"><use href="#i-film"/></svg></div><img src="film.png" alt="Insidious Out" loading="lazy"><span class="nx">A FILM</span><span class="pl"><svg class="ic"><use href="#i-play"/></svg></span><h4>Insidious Out</h4><span class="mt">Film 1 · HD</span></div>
+<div class="cd fm"><div class="ph"><svg class="ic"><use href="#i-film"/></svg></div><img src="film2.png" alt="Other Mommy" loading="lazy"><span class="nx">A FILM</span><span class="pl"><svg class="ic"><use href="#i-play"/></svg></span><h4>Other Mommy</h4><span class="mt">Film 2 · HD</span></div>
+<div class="cd fm"><div class="ph"><svg class="ic"><use href="#i-film"/></svg></div><img src="film3.png" alt="Ghost in the Cell" loading="lazy"><span class="nx">A FILM</span><span class="pl"><svg class="ic"><use href="#i-play"/></svg></span><h4>Ghost in the Cell</h4><span class="mt">Film 3 · HD</span></div>
+</div><button class="ar r">›</button></div></div>
 
-<section id="hobi">
-  <h2 class="title reveal">Hobi &amp; Minat</h2>
-  <div class="hobi">
-    <div class="hb reveal"><em>🍔</em><h4>Makan</h4><p>Nikmati berbagai makanan.</p></div>
-    <div class="hb reveal"><em>🎮</em><h4>Main Game</h4><p>Game favorit dan seru.</p></div>
-    <div class="hb reveal"><em>📖</em><h4>Baca Buku</h4><p>Cerita dan pengetahuan.</p></div>
-    <div class="hb reveal"><em>🍿</em><h4>Nonton Film</h4><p>Film seru dan menarik.</p></div>
-    <div class="hb reveal"><em>⚽</em><h4>Futsal</h4><p>Olahraga favorit.</p></div>
-    <div class="hb reveal"><em>🧠</em><h4>Belajar</h4><p>Mencari ilmu baru.</p></div>
-  </div>
-</section>
+<div class="row rv" id="hobi"><h3>Hobi &amp; Minat</h3><div class="rw"><button class="ar l">‹</button><div class="rail">
+<div class="cd hb" style="--c:#c2410c"><em><svg class="ic"><use href="#i-burger"/></svg></em><h4>Makan</h4><p>Nikmati berbagai makanan.</p></div>
+<div class="cd hb" style="--c:#6d28d9"><em><svg class="ic"><use href="#i-game"/></svg></em><h4>Main Game</h4><p>Game favorit dan seru.</p></div>
+<div class="cd hb" style="--c:#0f766e"><em><svg class="ic"><use href="#i-book"/></svg></em><h4>Baca Buku</h4><p>Cerita dan pengetahuan.</p></div>
+<div class="cd hb" style="--c:#b91c1c"><em><svg class="ic"><use href="#i-popcorn"/></svg></em><h4>Nonton Film</h4><p>Film seru dan menarik.</p></div>
+<div class="cd hb" style="--c:#1d4ed8"><em><svg class="ic"><use href="#i-ball"/></svg></em><h4>Futsal</h4><p>Olahraga favorit.</p></div>
+<div class="cd hb" style="--c:#a16207"><em><svg class="ic"><use href="#i-bulb"/></svg></em><h4>Belajar</h4><p>Mencari ilmu baru.</p></div>
+</div><button class="ar r">›</button></div></div>
 
-<section id="skills">
-  <h2 class="title reveal">Kemampuan</h2>
-  <div class="sk">
-    <div class="card reveal">
-      <h3>Hard Skills</h3>
-      <div class="bar"><div><span>Belajar &amp; Akademik</span><span>90%</span></div><div class="track"><div class="fill" data-w="90%"></div></div></div>
-      <div class="bar"><div><span>Main Game &amp; Strategi</span><span>85%</span></div><div class="track"><div class="fill" data-w="85%"></div></div></div>
-      <div class="bar"><div><span>Futsal</span><span>80%</span></div><div class="track"><div class="fill" data-w="80%"></div></div></div>
-      <div class="bar"><div><span>Membaca &amp; Analisis</span><span>78%</span></div><div class="track"><div class="fill" data-w="78%"></div></div></div>
-    </div>
-    <div class="card reveal">
-      <h3>Soft Skills</h3>
-      <div class="chips">
-        <span class="chip">Cepat Belajar</span><span class="chip">Kreativitas</span><span class="chip">Kerja Sama Tim</span>
-        <span class="chip">Manajemen Waktu</span><span class="chip">Komunikasi</span><span class="chip">Problem Solving</span>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="row rv" id="skills"><h3>Kemampuan</h3><div class="rw"><button class="ar l">‹</button><div class="rail">
+<div class="cd rg"><div class="ring" data-p="90"><b>0%</b></div><small>Belajar &amp; Akademik</small></div>
+<div class="cd rg"><div class="ring" data-p="85"><b>0%</b></div><small>Main Game &amp; Strategi</small></div>
+<div class="cd rg"><div class="ring" data-p="80"><b>0%</b></div><small>Futsal</small></div>
+<div class="cd rg"><div class="ring" data-p="78"><b>0%</b></div><small>Membaca &amp; Analisis</small></div>
+</div><button class="ar r">›</button></div>
+<div class="chips"><span class="chip">Cepat Belajar</span><span class="chip">Kreativitas</span><span class="chip">Kerja Sama Tim</span><span class="chip">Manajemen Waktu</span><span class="chip">Komunikasi</span><span class="chip">Problem Solving</span></div></div>
 
-<section id="goals">
-  <h2 class="title reveal">Cita-cita &amp; Target</h2>
-  <div class="tl reveal">
-    <div>Terus belajar dan meraih prestasi di sekolah.</div>
-    <div>Mengembangkan diri lewat hobi dan minat.</div>
-    <div>Menjadi pribadi yang bermanfaat bagi orang lain.</div>
-    <div>Melanjutkan pendidikan ke jenjang yang lebih tinggi.</div>
-  </div>
-</section>
+<div class="row rv" id="goals"><h3>Top 4 Cita-cita &amp; Target</h3><div class="rw"><button class="ar l">‹</button><div class="rail">
+<div class="cd t10"><div class="n">1</div><div class="tx">Terus belajar dan meraih prestasi di sekolah.</div></div>
+<div class="cd t10"><div class="n">2</div><div class="tx">Mengembangkan diri lewat hobi dan minat.</div></div>
+<div class="cd t10"><div class="n">3</div><div class="tx">Menjadi pribadi yang bermanfaat bagi orang lain.</div></div>
+<div class="cd t10"><div class="n">4</div><div class="tx">Melanjutkan pendidikan ke jenjang yang lebih tinggi.</div></div>
+</div><button class="ar r">›</button></div></div>
 
-<section id="contact">
-  <div class="card contact reveal">
-    <h2 class="title" style="justify-content:center">Hubungi Saya</h2>
-    <p>Mau ngobrol, kolaborasi, atau sekadar say hi? Hubungi aku lewat media di bawah ini:</p>
-    <div class="cl">
-      <a href="https://instagram.com/afkar" target="_blank" rel="noopener">📸 @afkar</a>
-      <a href="https://tiktok.com/@gataulupa" target="_blank" rel="noopener">🎵 @gataulupa</a>
-      <a href="mailto:afkar.thufail91@smp.belajar.id">✉️ Email</a>
-    </div>
-  </div>
-</section>
+<div class="end rv" id="contact"><h2>Hubungi Saya</h2><p>Mau ngobrol, kolaborasi, atau sekadar say hi? Hubungi aku lewat media di bawah ini:</p>
+<div class="cl"><a href="https://instagram.com/afkar" target="_blank" rel="noopener"><svg class="ic"><use href="#i-camera"/></svg> @afkar</a><a href="https://tiktok.com/@gataulupa" target="_blank" rel="noopener"><svg class="ic"><use href="#i-music"/></svg> @gataulupa</a><a href="mailto:afkar.thufail91@smp.belajar.id"><svg class="ic"><use href="#i-mail"/></svg> Email</a></div></div>
 
-<footer>
-  <p>© 2026 Personal Portfolio · Dibuat oleh <b>Afkar Thufail Effendi</b></p>
-  <p>Kelas 9 Ali</p>
-</footer>
-
+<footer><p>© 2026 Personal Portfolio · Dibuat oleh <b>Afkar Thufail Effendi</b></p><p>Kelas 9 Ali</p></footer>
 <button id="top" aria-label="Kembali ke atas">↑</button>
 <div id="lb"><img alt=""></div>
 
 <script>
-// Intro
-const intro=document.getElementById('intro');
-const hide=()=>intro.classList.add('out');
-intro.addEventListener('click',hide);
-const msgs=['Memuat profil...','Menyiapkan film...','Menyalakan layar...','Siap tayang!'];
-let pct=0;const ibar=document.getElementById('ibar'),ipct=document.getElementById('ipct');
-const tick=setInterval(()=>{
-  pct=Math.min(100,pct+2+Math.random()*4);
-  ibar.style.width=pct+'%';
-  ipct.textContent=msgs[Math.min(3,Math.floor(pct/26))]+' '+Math.floor(pct)+'%';
-  if(pct>=100){clearInterval(tick);setTimeout(hide,500)}
-},70);
-
-// Theme
-const root=document.documentElement,tb=document.getElementById('theme');
-const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
-const paint=()=>{tb.textContent=isDark()?'☀️':'🌙'};
-try{const s=localStorage.getItem('afkar-theme');if(s)root.dataset.theme=s}catch(e){}
-paint();
+const $=id=>document.getElementById(id),ic=n=>'<svg class="ic"><use href="#i-'+n+'"/></svg>';
+const LOGO='<svg class="lgs" viewBox="0 0 100 120"><polygon class="a l" points="38,0 60,0 32,120 8,120" fill="url(#gl)"/><polygon class="a r" points="40,0 62,0 92,120 70,120" fill="url(#gr)"/><polygon class="a c" points="23,80 77,80 72,98 28,98" fill="url(#gc)"/></svg>';
+// Logo animasi Netflix: intro
+const intro=$('intro');
+intro.innerHTML='<div class="rays"></div><div class="lg">'+LOGO+'</div><div class="wm2">AFKARFLIX</div><div class="iskip">KETUK UNTUK LEWATI</div>';
+const hide=()=>intro.classList.add('out');intro.onclick=hide;setTimeout(hide,4600);
+$('nl').insertAdjacentHTML('afterbegin',LOGO);$('wm').innerHTML=LOGO;
+// Pilih profil
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{$('who').classList.add('out');document.body.classList.add('go')});
+// Tema (default gelap)
+const root=document.documentElement,tb=$('theme'),isDark=()=>root.dataset.theme!=='light',paint=()=>tb.innerHTML=ic(isDark()?'sun':'moon');
+try{if(localStorage.getItem('afkar-theme')==='light')root.dataset.theme='light'}catch(e){}paint();
 tb.onclick=()=>{const n=isDark()?'light':'dark';root.dataset.theme=n;try{localStorage.setItem('afkar-theme',n)}catch(e){}paint()};
-
-// Typed text
-const words=['Pelajar Kelas 9','Gamer','Pemain Futsal','Kutu Buku','Pecinta Film'];
-let w=0,c=0,del=false;const el=document.getElementById('typed');
-(function type(){
-  const cur=words[w];c+=del?-1:1;el.textContent=cur.slice(0,c);
-  let d=del?45:90;
-  if(!del&&c===cur.length){del=true;d=1300}
-  else if(del&&c===0){del=false;w=(w+1)%words.length;d=300}
-  setTimeout(type,d);
-})();
-
-// Reveal + skill bars
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in');
-    e.target.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w);io.unobserve(e.target)}
-}),{threshold:.2});
-document.querySelectorAll('.reveal').forEach((r,i)=>{r.style.transitionDelay=(i%4)*80+'ms';io.observe(r)});
-
-// Film gallery: lightbox + fallback if image missing
-const lb=document.getElementById('lb'),lbi=lb.querySelector('img');
-document.querySelectorAll('.film').forEach(f=>{
-  const im=f.querySelector('img');
-  im.onerror=()=>{im.style.display='none'};
-  f.onclick=()=>{if(im.style.display==='none')return;lbi.src=im.src;lb.classList.add('on')};
-});
-lb.onclick=()=>lb.classList.remove('on');
-addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
-
-// Back to top
-const toTopBtn=document.getElementById('top');
-addEventListener('scroll',()=>toTopBtn.classList.toggle('show',scrollY>500));
-toTopBtn.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+// Teks mengetik
+const words=['Pelajar Kelas 9','Gamer','Pemain Futsal','Kutu Buku','Pecinta Film'];let w=0,c=0,del=false;
+(function type(){const cur=words[w];c+=del?-1:1;$('typed').textContent=cur.slice(0,c);let d=del?45:90;
+if(!del&&c===cur.length){del=true;d=1300}else if(del&&c===0){del=false;w=(w+1)%words.length;d=300}setTimeout(type,d)})();
+// Baris geser
+document.querySelectorAll('.rw').forEach(r=>{const rl=r.querySelector('.rail');r.querySelector('.ar.l').onclick=()=>rl.scrollBy({left:-rl.clientWidth*.8,behavior:'smooth'});r.querySelector('.ar.r').onclick=()=>rl.scrollBy({left:rl.clientWidth*.8,behavior:'smooth'})});
+// Muncul, hitung, cincin
+const anim=(el,to,fn)=>{const t0=performance.now(),s=t=>{const k=Math.min((t-t0)/1400,1),e=1-Math.pow(1-k,3);fn(to*e);if(k<1)requestAnimationFrame(s)};requestAnimationFrame(s)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
+e.target.querySelectorAll('[data-n]').forEach(n=>anim(n,+n.dataset.n,v=>n.textContent=Math.round(v)));
+e.target.querySelectorAll('.ring').forEach(r=>anim(r,+r.dataset.p,v=>{r.style.setProperty('--p',v);r.firstChild.textContent=Math.round(v)+'%'}));io.unobserve(e.target)}),{threshold:.2});
+document.querySelectorAll('.rv').forEach(r=>io.observe(r));
+// Lightbox film
+const lb=$('lb'),lbi=lb.querySelector('img');
+document.querySelectorAll('.fm').forEach(f=>{const im=f.querySelector('img');im.onerror=()=>{im.style.display='none'};f.onclick=()=>{if(im.style.display==='none')return;lbi.src=im.src;lb.classList.add('on')}});
+lb.onclick=()=>lb.classList.remove('on');addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+// Scroll
+const tp=$('top');addEventListener('scroll',()=>{tp.classList.toggle('show',scrollY>500);$('pg').style.width=scrollY/(document.documentElement.scrollHeight-innerHeight)*100+'%'});
+tp.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+// Transisi tombol: ex = logo A animasi + cahaya, cd = hitung mundur film
+const tr=$('tr'),tc=$('tc');let busy=0;
+document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();if(busy)return;busy=1;
+const mode=a.dataset.go,target=document.querySelector(a.getAttribute('href'));let jump,end;
+if(mode==='ex'){tc.innerHTML='<div class="lg">'+LOGO+'</div><small>MENJELAJAH...</small>';jump=1100;end=1500}
+else{tc.innerHTML='<div class="cring" id="rg"><b>3</b></div><small>SEGERA TAYANG</small>';[1,2].forEach(i=>setTimeout(()=>{$('rg').innerHTML='<b>'+(3-i)+'</b>'},i*380));jump=1250;end=1250}
+tr.className='on '+mode;setTimeout(()=>target.scrollIntoView({behavior:'instant',block:'start'}),jump);
+setTimeout(()=>tr.classList.add('fade'),end);setTimeout(()=>{tr.className='';tc.innerHTML='';busy=0},end+600)}));
 </script>
 </body>
 </html>
